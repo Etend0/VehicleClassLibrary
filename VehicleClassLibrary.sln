@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleClassLibrary", "VehicleClassLibrary\VehicleClassLibrary.csproj", "{0B40D674-36F6-4A54-B03F-55F391298203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleClassLibrary.Tests", "VehicleClassLibrary.Tests\VehicleClassLibrary.Tests.csproj", "{3F46C350-7482-4E98-A2ED-4F5BC2D5F811}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B40D674-36F6-4A54-B03F-55F391298203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B40D674-36F6-4A54-B03F-55F391298203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B40D674-36F6-4A54-B03F-55F391298203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B40D674-36F6-4A54-B03F-55F391298203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F46C350-7482-4E98-A2ED-4F5BC2D5F811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F46C350-7482-4E98-A2ED-4F5BC2D5F811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F46C350-7482-4E98-A2ED-4F5BC2D5F811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F46C350-7482-4E98-A2ED-4F5BC2D5F811}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3DC97FBB-8F43-442B-A2EE-40CC8E1A859A}
+	EndGlobalSection
+EndGlobal
