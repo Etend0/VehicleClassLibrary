@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace VehicleClassLibrary.Models
 {
-    public class MotercycleModel : VehicleModel
+    public class MotorcycleModel : VehicleModel
     {
         // Class level properties
         public bool HasSideCar { get; set; }
@@ -23,7 +23,7 @@ namespace VehicleClassLibrary.Models
         /// <summary>
         /// Default constructor for the motorcycle model
         /// </summary>
-        public MotercycleModel() : base()
+        public MotorcycleModel() : base()
         {
             HasSideCar = false;
             SeatHeight = 0m;
@@ -40,7 +40,7 @@ namespace VehicleClassLibrary.Models
         /// <param name="numWheels"></param>
         /// <param name="hasSidecar"></param>
         /// <param name="seatHeight"></param>
-        public MotercycleModel(int id, string make, string model, int year, decimal price, int numWheels, bool hasSidecar, decimal seatHeight)
+        public MotorcycleModel(int id, string make, string model, int year, decimal price, int numWheels, bool hasSidecar, decimal seatHeight)
             : base(id, make, model, year, price, numWheels)
         {
             HasSideCar = hasSidecar;

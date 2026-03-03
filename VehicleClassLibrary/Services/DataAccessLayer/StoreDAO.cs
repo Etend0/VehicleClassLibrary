@@ -123,7 +123,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
 
                             case "MotorcycleModel":
                                 // Cast the vehicle to a motorcycle
-                                MotercycleModel motorcycle = (MotercycleModel)vehicle;
+                                MotorcycleModel motorcycle = (MotorcycleModel)vehicle;
                                 // Write the motorcycle to the file
                                 writer.WriteLine($"Motorcycle,{motorcycle.Make},{motorcycle.Model},{motorcycle.Year},{motorcycle.Price}," +
                                     $"{motorcycle.NumWheels},{motorcycle.HasSideCar},{motorcycle.SeatHeight}");
@@ -212,7 +212,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Parse the seat height for the motorcycle
                                 seatHeight = ParseDecimal(parts[7]);
                                 // Create a new motorcycle using the read properties
-                                MotercycleModel motorcycle = new MotercycleModel(0, make, model, year, price, numWheels, hasSideCar, seatHeight);
+                                MotorcycleModel motorcycle = new MotorcycleModel(0, make, model, year, price, numWheels, hasSideCar, seatHeight);
                                 // Add the motorcycle to the inventory
                                 AddVehicleToInventory(motorcycle);
                                 break;
