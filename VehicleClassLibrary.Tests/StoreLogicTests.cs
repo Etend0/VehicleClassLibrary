@@ -4,8 +4,8 @@ using VehicleClassLibrary.Services.DataAccessLayer;
 namespace VehicleClassLibrary.Tests
 {
     public class StoreLogicTests
-    {
-        /*// Mark this mewthod as a unit testing the [Fact] attribute from xUnit
+    {/*
+        // Mark this mewthod as a unit testing the [Fact] attribute from xUnit
         [Fact]
         public void AddVehicleToInventory_ShouldIncreaseInventoryCount()
         {
@@ -174,9 +174,9 @@ namespace VehicleClassLibrary.Tests
             List<VehicleModel> inventory = newDAO.GetInventory();
 
             newDAO.GetShoppingCart();
-        }*/
+        }
 
-        /*// Test that AddVehicleToInventory correctly adds a vehicle to the inventory list
+        // Test that AddVehicleToInventory correctly adds a vehicle to the inventory list
         [Fact]
         public void AddVehicleToInventory_Test()
         {
@@ -199,9 +199,9 @@ namespace VehicleClassLibrary.Tests
             newDAO.AddVehicleToInventory(car1);
 
             newDAO.GetInventory();
-        }*/
+        }
 
-        // Test that Checkout returns the correct total and clears the shopping cart
+        // Test that AddVehicleToCart correctly adds a vehicle to the shopping cart
         [Fact]
         public void AddVehicleToCart_Test()
         {
@@ -223,6 +223,30 @@ namespace VehicleClassLibrary.Tests
             newDAO.AddVehicleToCart(car1.Id);
 
             newDAO.GetShoppingCart();
+        }*/
+
+        // Test that Checkout returns the correct total and clears the shopping cart
+        [Fact]
+        public void Checkout_Test()
+        {
+            StoreDAO newDAO = new StoreDAO();
+
+            List<VehicleModel> cart = new List<VehicleModel>();
+            CarModel car1 = new CarModel
+            {
+                Id = 0,
+                Make = "Ford",
+                Model = "F-150",
+                Year = 2021,
+                Price = 40000m,
+                NumWheels = 4,
+                IsConvertable = true,
+                TrunkSize = 2.5m
+            };
+
+            newDAO.AddVehicleToCart(car1.Id);
+
+            newDAO.Checkout();
         }
     }
 }
