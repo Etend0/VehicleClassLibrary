@@ -4,6 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * Elijah Hodge
+ * CST - 250
+ * 3/1/2026
+ * Vehicle Class Library
+ * Activity 1
+ */
+
 namespace VehicleClassLibrary.Models
 {
     public class PickupModel : VehicleModel
@@ -39,6 +47,10 @@ namespace VehicleClassLibrary.Models
             BedSize = bedSize;
         }
 
+        /// <summary>
+        /// ToString method for printing a pickup
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             // Use a ternary operator (in-line if) to get the bed cover string

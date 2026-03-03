@@ -47,6 +47,10 @@ namespace VehicleClassLibrary.Models
             SeatHeight = seatHeight;
         }
 
+        /// <summary>
+        /// String method for printing a motorcycle
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             // Use a ternary operator (in-line if) to get the sidecar string

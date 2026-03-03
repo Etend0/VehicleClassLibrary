@@ -1,10 +1,11 @@
 using VehicleClassLibrary.Models;
+using VehicleClassLibrary.Services.BusinessLogicLayer;
 using VehicleClassLibrary.Services.DataAccessLayer;
 
 namespace VehicleClassLibrary.Tests
 {
     public class StoreLogicTests
-    {/*
+    {
         // Mark this mewthod as a unit testing the [Fact] attribute from xUnit
         [Fact]
         public void AddVehicleToInventory_ShouldIncreaseInventoryCount()
@@ -81,7 +82,7 @@ namespace VehicleClassLibrary.Tests
             Assert.Equal(1, result);
 
             // Assert: Verify that the cart contains the correct vehicle
-            Assert.Contains(car, verify => verify.Id == car.Id);
+            Assert.Contains(cart, verify => verify.Id == car.Id);
         }
 
         // Test that GetShoppingCart returns an empty list when no vehicles are added
@@ -223,7 +224,7 @@ namespace VehicleClassLibrary.Tests
             newDAO.AddVehicleToCart(car1.Id);
 
             newDAO.GetShoppingCart();
-        }*/
+        }
 
         // Test that Checkout returns the correct total and clears the shopping cart
         [Fact]

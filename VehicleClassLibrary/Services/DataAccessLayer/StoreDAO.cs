@@ -125,12 +125,14 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Cast the vehicle to a motorcycle
                                 MotercycleModel motorcycle = (MotercycleModel)vehicle;
                                 // Write the motorcycle to the file
-                                writer.WriteLine($"Motorcycle,{motorcycle.Make},{motorcycle.Model},{motorcycle.Year},{motorcycle.Price},{motorcycle.NumWheels},{motorcycle.HasSideCar}, {motorcycle.SeatHeight}");
+                                writer.WriteLine($"Motorcycle,{motorcycle.Make},{motorcycle.Model},{motorcycle.Year},{motorcycle.Price}," +
+                                    $"{motorcycle.NumWheels},{motorcycle.HasSideCar},{motorcycle.SeatHeight}");
                                 break;
 
                             case "PickupModel":
                                 PickupModel pickup = (PickupModel)vehicle;
-                                writer.WriteLine($"Pickup,{pickup.Make},{pickup.Model},{pickup.Year},{pickup.Price},{pickup.NumWheels},{pickup.HasBedCover},{pickup.BedSize}");
+                                writer.WriteLine($"Pickup,{pickup.Make},{pickup.Model},{pickup.Year},{pickup.Price},{pickup.NumWheels}," +
+                                    $"{pickup.HasBedCover},{pickup.BedSize}");
                                 break;
 
                             default:
@@ -184,11 +186,11 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                         make = parts[1];
                         model = parts[2];
                         // Parse the year of the vehicle
-                        year = PartInteger(parts[3]);
+                        year = ParseInteger(parts[3]);
                         // Parse the price of the vehicle
                         price = ParseDecimal(parts[4]);
                         // Parse the number of wheels on the vehicle
-                        numWheels = PartInteger(parts[5]);
+                        numWheels = ParseInteger(parts[5]);
 
                         // Use the first piece of data to create a switch for the specific model
                         switch (parts[0])
@@ -251,7 +253,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private int PartInteger(string input)
+        private int ParseInteger(string input)
         {
             try
             {   // Parse the input and return             

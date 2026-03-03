@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 using VehicleClassLibrary.Models;
 using VehicleClassLibrary.Services.DataAccessLayer;
 
+/*
+ * Elijah Hodge
+ * CST - 250
+ * 3/1/2026
+ * Vehicle Class Library
+ * Activity 1
+ */
+
 namespace VehicleClassLibrary.Services.BusinessLogicLayer
 {
     public class StoreLogic
