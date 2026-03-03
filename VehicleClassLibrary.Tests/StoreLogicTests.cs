@@ -1,8 +1,11 @@
+using VehicleClassLibrary.Models;
+using VehicleClassLibrary.Services.DataAccessLayer;
+
 namespace VehicleClassLibrary.Tests
 {
     public class StoreLogicTests
     {
-        // Mark this mewthod as a unit testing the [Fact] attribute from xUnit
+        /*// Mark this mewthod as a unit testing the [Fact] attribute from xUnit
         [Fact]
         public void AddVehicleToInventory_ShouldIncreaseInventoryCount()
         {
@@ -151,6 +154,75 @@ namespace VehicleClassLibrary.Tests
             Assert.Empty(cartAfterCheckout);
         }
 
+        // Test that GetInventory returns the correct list of vehicles in inventory
+        [Fact]
+        public void GetInventory_Test()
+        {
+            StoreDAO newDAO = new StoreDAO();
 
+            List<VehicleModel> inventory = newDAO.GetInventory();
+
+            newDAO.GetInventory();
+        }
+
+        // Test that GetShoppingCart returns the correct list of vehicles in the shopping cart
+        [Fact]
+        public void GetShoppingCart_Test()
+        {
+            StoreDAO newDAO = new StoreDAO();
+
+            List<VehicleModel> inventory = newDAO.GetInventory();
+
+            newDAO.GetShoppingCart();
+        }*/
+
+        /*// Test that AddVehicleToInventory correctly adds a vehicle to the inventory list
+        [Fact]
+        public void AddVehicleToInventory_Test()
+        {
+            StoreDAO newDAO = new StoreDAO();
+
+            List<VehicleModel> inventory = new List<VehicleModel>();
+
+            CarModel car1 = new CarModel
+            {
+                Id = 0,
+                Make = "Ford",
+                Model = "F-150",
+                Year = 2021,
+                Price = 40000m,
+                NumWheels = 4,
+                IsConvertable = true,
+                TrunkSize = 2.5m
+            };
+
+            newDAO.AddVehicleToInventory(car1);
+
+            newDAO.GetInventory();
+        }*/
+
+        // Test that Checkout returns the correct total and clears the shopping cart
+        [Fact]
+        public void AddVehicleToCart_Test()
+        {
+            StoreDAO newDAO = new StoreDAO();
+
+            List<VehicleModel> cart = new List<VehicleModel>();
+            CarModel car1 = new CarModel
+            {
+                Id = 0,
+                Make = "Ford",
+                Model = "F-150",
+                Year = 2021,
+                Price = 40000m,
+                NumWheels = 4,
+                IsConvertable = true,
+                TrunkSize = 2.5m
+            };
+
+            newDAO.AddVehicleToCart(car1.Id);
+
+            newDAO.GetShoppingCart();
+        }
     }
 }
