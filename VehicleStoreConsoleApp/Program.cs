@@ -143,45 +143,34 @@ static void ControlLoop()
 
             case 3:
                 // Read the type of vehicle
-                Console.WriteLine("Enter 1 to create a car, 2 to create a motorcycle, 3 " +
-                    "to create a pickup, or 4 to create a vehicle: ");
-                choice = int.Parse(Console.ReadLine());
-
+                int vehicleType = ValidatorClass.GetValidInt("Enter 1 to create a car, 2 to create a motorcycle, 3 to create a pickup, or 4 to create a vehicle: ", min: 1, max: 4);
 
                 // Get the common properties for the vehicle
+
                 // Read in the make of the vehicle
-                Console.WriteLine("Enter the make of the vehicle: ");
-                make = Console.ReadLine();
+                make = ValidatorClass.GetValidLettersOnlyString("Enter the make of the vehicle: ");
                 // Read in the model of the vehicle
-                Console.WriteLine("Enter the model of the vehicle: ");
-                model = Console.ReadLine();
+                model = ValidatorClass.GetValidLettersOnlyString("Enter the model of the vehicle: ");
                 // Read in the color of the vehicle
-                Console.WriteLine("Enter the color of the vehicle: ");
-                color = Console.ReadLine();
+                color = ValidatorClass.GetValidLettersOnlyString("Enter the color of the vehicle: ");
                 // Read in the year of the vehicle
-                Console.WriteLine("Enter the year of the vehicle: ");
-                year = int.Parse(Console.ReadLine());
+                year = ValidatorClass.GetValidInt("Enter the year of the vehicle: ");
                 // Read in the mileage of the vehicle
-                Console.WriteLine("Enter the mileage of the vehicle: ");
-                mileage = decimal.Parse(Console.ReadLine());
+                mileage = ValidatorClass.GetValidDecimal("Enter the mileage of the vehicle: ");
                 // Read in the price of the vehicle
-                Console.WriteLine("Enter the price of the vehicle: ");
-                price = decimal.Parse(Console.ReadLine());
+                price = ValidatorClass.GetValidDecimal("Enter the price of the vehicle: ");
                 // Read in the number of wheels of the vehicle
-                Console.WriteLine("Enter the number of wheels of the vehicle: ");
-                numWheels = int.Parse(Console.ReadLine());
+                numWheels = ValidatorClass.GetValidInt("Enter the number of wheels of the vehicle: ");
 
                 // Switch statement to read the vehicle-specific properties
-                switch (choice)
+                switch (vehicleType)
                 {
                     // Car
                     case 1:
                         // Read the convertible status of the car
-                        Console.WriteLine("Enter if the car is a convertible (true/false): ");
-                        isConvertable = bool.Parse(Console.ReadLine());
+                        isConvertable = ValidatorClass.GetValidBool("Enter if the car is a convertible (true/false): ");
                         // Read the trunk size of the car
-                        Console.WriteLine("Enter the trunk size of the car in cubic feet: ");
-                        trunkSize = decimal.Parse(Console.ReadLine());
+                        trunkSize = ValidatorClass.GetValidDecimal("Enter the trunk size of the car in cubic feet: ");
                         // Create a new car
                         vehicle = new CarModel(id, make, model, color, year, mileage, price, numWheels, isConvertable,
                             trunkSize);
@@ -190,11 +179,9 @@ static void ControlLoop()
                     // Motorcycle
                     case 2:
                         // Read the side car status of the motorcycle
-                        Console.WriteLine("Enter if the motorcycle has a side car (true/false): ");
-                        hasSideCar = bool.Parse(Console.ReadLine());
+                        hasSideCar = ValidatorClass.GetValidBool("Enter if the motorcycle has a side car (true/false): ");
                         // Read the seat height of the motorcycle
-                        Console.WriteLine("Enter the seat height of the motorcycle in inches: ");
-                        seatHeight = decimal.Parse(Console.ReadLine());
+                        seatHeight = ValidatorClass.GetValidDecimal("Enter the seat height of the motorcycle in inches: ");
                         // Create a new motorcycle
                         vehicle = new MotorcycleModel(id, make, model, color, year, mileage, price, numWheels, hasSideCar,
                             seatHeight);
@@ -203,11 +190,9 @@ static void ControlLoop()
                     // Pickup
                     case 3:
                         // Read the bed cover status of the pickup
-                        Console.WriteLine("Enter if the pickup has a bed cover (true/false): ");
-                        hasBedCover = bool.Parse(Console.ReadLine());
+                        hasBedCover = ValidatorClass.GetValidBool("Enter if the pickup has a bed cover (true/false): ");
                         // Read the bed size of the pickup
-                        Console.WriteLine("Enter the bed size of the pickup in cubic feet: ");
-                        bedSize = decimal.Parse(Console.ReadLine());
+                        bedSize = ValidatorClass.GetValidDecimal("Enter the bed size of the pickup in cubic feet: ");
                         // Create a new pickup
                         vehicle = new PickupModel(id, make, model, color, year, mileage, price, numWheels, hasBedCover,
                             bedSize);
