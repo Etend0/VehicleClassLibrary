@@ -150,7 +150,7 @@ static void ControlLoop()
                 // Read in the make of the vehicle
                 make = ValidatorClass.GetValidLettersOnlyString("Enter the make of the vehicle: ");
                 // Read in the model of the vehicle
-                model = ValidatorClass.GetValidLettersOnlyString("Enter the model of the vehicle: ");
+                model = ValidatorClass.GetValidString("Enter the model of the vehicle: ");
                 // Read in the color of the vehicle
                 color = ValidatorClass.GetValidLettersOnlyString("Enter the color of the vehicle: ");
                 // Read in the year of the vehicle
@@ -212,13 +212,28 @@ static void ControlLoop()
 
             // Add a vehicle to the shopping cart
             case 4:
-                // Get the id of the vehicle from the user
-                Console.WriteLine("Enter the id of the vehicle you want to buy: ");
-                id = int.Parse(Console.ReadLine());
-                // Add the vehicle to the shopping cart
-                storeLogic.AddVehicleToCart(id);
-                Console.WriteLine();
-                break;
+                if (storeLogic.GetInventory().Count == 0)
+                {
+                    Console.WriteLine("There are no vehicles in the inventory to add to the shopping cart. There must be at least one vehicle to add to your cart.");
+                    Console.WriteLine();
+                    break;
+                }
+                else
+                {
+                    // Print the inventory for the user to see the ids of the vehicles
+                    Console.WriteLine("Inventory: ");
+                    foreach (VehicleModel inventoryVehicle in storeLogic.GetInventory())
+                    {
+                        Console.WriteLine(inventoryVehicle);
+                    }
+                    // Get the id of the vehicle from the user
+                    int maxSize = storeLogic.GetInventory().Count;
+                    id = ValidatorClass.GetValidInt("Enter the id of the vehicle you want to buy: ", min: 0, max: maxSize);
+                    // Add the vehicle to the shopping cart
+                    storeLogic.AddVehicleToCart(id);
+                    Console.WriteLine();
+                    break;
+                }
 
             // Checkout
             case 5:
