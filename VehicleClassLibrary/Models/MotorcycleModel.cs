@@ -40,8 +40,8 @@ namespace VehicleClassLibrary.Models
         /// <param name="numWheels"></param>
         /// <param name="hasSidecar"></param>
         /// <param name="seatHeight"></param>
-        public MotorcycleModel(int id, string make, string model, int year, decimal price, int numWheels, bool hasSidecar, decimal seatHeight)
-            : base(id, make, model, year, price, numWheels)
+        public MotorcycleModel(int id, string make, string model, string color, int year, decimal price, decimal mileage, int numWheels, bool hasSidecar, decimal seatHeight)
+            : base(id, make, model, color, year, price, mileage, numWheels)
         {
             HasSideCar = hasSidecar;
             SeatHeight = seatHeight;
@@ -59,7 +59,7 @@ namespace VehicleClassLibrary.Models
 
             // Print the motorcycle in the following format
             // 1: 2015 Yamah Bolt with 2 wheels and a 44.1 inch seat with(out) a side car - $8000.00
-            return $"{Id} {Year} {Make} {Model} with {NumWheels} wheels and a {SeatHeight} inch seat {sidecar} a side car - {Price:C2}";
+            return $"{Id} {Year} {Make} {Model} {Color} with {Mileage} miles, {NumWheels} wheels and a {SeatHeight} inch seat {sidecar} a side car - {Price:C2}";
         }
     }
 }

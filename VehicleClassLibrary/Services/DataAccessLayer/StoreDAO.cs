@@ -118,26 +118,26 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Cast the vehicle to a car
                                 CarModel car = (CarModel)vehicle;
                                 // Write the car to the file
-                                writer.WriteLine($"Car,{car.Make},{car.Model},{car.Year},{car.Price},{car.NumWheels},{car.IsConvertable},{car.TrunkSize}");
+                                writer.WriteLine($"Car,{car.Make},{car.Model},{car.Color},{car.Year},{car.Mileage},{car.Price},{car.NumWheels},{car.IsConvertable},{car.TrunkSize}");
                                 break;
 
                             case "MotorcycleModel":
                                 // Cast the vehicle to a motorcycle
                                 MotorcycleModel motorcycle = (MotorcycleModel)vehicle;
                                 // Write the motorcycle to the file
-                                writer.WriteLine($"Motorcycle,{motorcycle.Make},{motorcycle.Model},{motorcycle.Year},{motorcycle.Price}," +
+                                writer.WriteLine($"Motorcycle,{motorcycle.Make},{motorcycle.Model},{motorcycle.Color},{motorcycle.Year},{motorcycle.Mileage},{motorcycle.Price}," +
                                     $"{motorcycle.NumWheels},{motorcycle.HasSideCar},{motorcycle.SeatHeight}");
                                 break;
 
                             case "PickupModel":
                                 PickupModel pickup = (PickupModel)vehicle;
-                                writer.WriteLine($"Pickup,{pickup.Make},{pickup.Model},{pickup.Year},{pickup.Price},{pickup.NumWheels}," +
+                                writer.WriteLine($"Pickup,{pickup.Make},{pickup.Model},{pickup.Color},{pickup.Year},{pickup.Mileage},{pickup.Price},{pickup.NumWheels}," +
                                     $"{pickup.HasBedCover},{pickup.BedSize}");
                                 break;
 
                             default:
                                 // Write the vehilce to the file
-                                writer.WriteLine($"Vehicle,{vehicle.Make},{vehicle.Model},{vehicle.Year},{vehicle.Price},{vehicle.NumWheels}");
+                                writer.WriteLine($"Vehicle,{vehicle.Make},{vehicle.Model},{vehicle.Color},{vehicle.Year},{vehicle.Mileage},{vehicle.Price},{vehicle.NumWheels}");
                                 break;
                         }
                     }
@@ -145,7 +145,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                 // Return true if all the data was saved to the file
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 // Return false if an exception was thrown
                 return false;
@@ -162,9 +162,9 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
             // Declare and initialize
             string? line = "";
             string[] parts = [];
-            string make = "", model = "";
+            string make = "", model = "", color = "";
             int year = 0, numWheels = 0;
-            decimal price = 0m;
+            decimal price = 0m, mileage = 0m;
             // Specialty vehicle variables
             bool isConvertable = false, hasSideCar = false, hasBedCover = false;
             decimal trunkSize = 0m, seatHeight = 0m, bedSize = 0m;
@@ -182,15 +182,17 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                         // Create a string array to put all the separate vehicle parts into
                         parts = line.Split(", ");
 
-                        // Use the parts array to get the common data (make, model, year, price, numWheels)
+                        // Use the parts array to get the common data (make, model, color, year, mileage, price, numWheels)
                         make = parts[1];
                         model = parts[2];
+                        color = parts[3];
                         // Parse the year of the vehicle
-                        year = ParseInteger(parts[3]);
-                        // Parse the price of the vehicle
-                        price = ParseDecimal(parts[4]);
+                        year = ParseInteger(parts[4]);
+                        // Parse the mileage and price of the vehicle
+                        mileage = ParseInteger(parts[5]);
+                        price = ParseDecimal(parts[6]);
                         // Parse the number of wheels on the vehicle
-                        numWheels = ParseInteger(parts[5]);
+                        numWheels = ParseInteger(parts[7]);
 
                         // Use the first piece of data to create a switch for the specific model
                         switch (parts[0])
@@ -201,7 +203,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Parse the trunk size for the car
                                 trunkSize = ParseDecimal(parts[7]);
                                 // Create a new car using the read properties
-                                CarModel car = new CarModel(0, make, model, year, price, numWheels, isConvertable, trunkSize);
+                                CarModel car = new CarModel(0, make, model, color, year, mileage, price, numWheels, isConvertable, trunkSize);
                                 // Add the car to the inventory
                                 AddVehicleToInventory(car);
                                 break;
@@ -212,7 +214,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Parse the seat height for the motorcycle
                                 seatHeight = ParseDecimal(parts[7]);
                                 // Create a new motorcycle using the read properties
-                                MotorcycleModel motorcycle = new MotorcycleModel(0, make, model, year, price, numWheels, hasSideCar, seatHeight);
+                                MotorcycleModel motorcycle = new MotorcycleModel(0, make, model, color, year, mileage, price, numWheels, hasSideCar, seatHeight);
                                 // Add the motorcycle to the inventory
                                 AddVehicleToInventory(motorcycle);
                                 break;
@@ -223,14 +225,14 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                                 // Parse the bed size for the pickup
                                 bedSize = ParseDecimal(parts[7]);
                                 // Create a new pickup using the read properties
-                                PickupModel pickup = new PickupModel(0, make, model, year, price, numWheels, hasBedCover, bedSize);
+                                PickupModel pickup = new PickupModel(0, make, model, color, year, mileage, price, numWheels, hasBedCover, bedSize);
                                 // Add the pickup to the inventory
                                 AddVehicleToInventory(pickup);
                                 break;
 
                             default:
                                 // Create a new vehicle using the read properties
-                                VehicleModel vehicle = new VehicleModel(0, make, model, year, price, numWheels);
+                                VehicleModel vehicle = new VehicleModel(0, make, model, color, year, mileage, price, numWheels);
                                 // Add the vehicle to the inventory
                                 AddVehicleToInventory(vehicle);
                                 break;
@@ -239,7 +241,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 // Return the inventory list
                 return _inventory;
@@ -259,7 +261,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
             {   // Parse the input and return             
                 return int.Parse(input);
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 // Return 0
                 return 0;
@@ -277,7 +279,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
             {   // Parse the input and return             
                 return decimal.Parse(input);
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 // Return 0
                 return 0m;
@@ -295,7 +297,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
             {   // Parse the input and return             
                 return bool.Parse(input);
             }
-            catch (Exception ex)
+            catch (Exception exp)
             {
                 // Return false
                 return false;

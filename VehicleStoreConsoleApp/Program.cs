@@ -15,10 +15,11 @@ using VehicleClassLibrary.Services.BusinessLogicLayer;
 
 // Print a welcome message to the user
 
-Console.WriteLine("Welcome to the vehicle shop! To begin, please create a selection" +
-    "of vehicles and add them to the inventory. Once the inventory is populated, you can" +
-    "proceed by adding vehcles to your cart. Finally, when you're ready to complete" +
+Console.WriteLine("Welcome to the vehicle shop! To begin, please create a selection " +
+    "of vehicles and add them to the inventory. Once the inventory is populated, you can " +
+    "proceed by adding vehcles to your cart. Finally, when you're ready to complete " +
     "your purchase, proceed to the checkout where your total bill will be calculated.");
+Console.WriteLine();
 
 // Call the control loop method to start the program running
 ControlLoop();
@@ -38,9 +39,9 @@ static int ReadChoice()
     while (choice == -1)
     {
         // Print the users options
-        Console.WriteLine("Choose an action: \n0) Quit \n1) Print the inventory \n2) Print the shopping cart \n3)" +
-            "Create a vehicle \n4) Add a vehicle to the shopping cart \n5) Checkout \n6 Save inventory to a text" +
-            "file \n7 Load inventory from a text file \nInput: ");
+        Console.WriteLine("Choose an action: \n0) Quit \n1) Print the inventory \n2) Print the shopping cart \n3) " +
+            "Create a vehicle \n4) Add a vehicle to the shopping cart \n5) Checkout \n6) Save inventory to a text" +
+            "file \n7) Load inventory from a text file \nInput: ");
 
         // Read the user input from the console
         input = Console.ReadLine();
@@ -49,8 +50,18 @@ static int ReadChoice()
         {
             try
             {
-                // Parse the input from the user to the choice variable
-                choice = int.Parse(input);
+                int curNum = int.Parse(input);
+
+                if (curNum < 8 && curNum > -1)
+                { 
+                    // Parse the input from the user to the choice variable
+                    choice = int.Parse(input);
+                }
+                else
+                {
+                    Console.WriteLine("Please enter a valid number. The number entered was either too small or too " +
+                    "large.");
+                }
             }
             catch (FormatException)
             {
@@ -74,12 +85,13 @@ static int ReadChoice()
 // Control the car store loop
 static void ControlLoop()
 {
+    ValidatorClass validator = new ValidatorClass();
     // Create an instance of the store logic class
     StoreLogic storeLogic = new StoreLogic();
     // Declare and initialize other variables
     int choice = -1, id = 0, year = 0, numWheels = 0;
-    String make = "", model = "";
-    decimal price = 0m, total = 0m;
+    String make = "", model = "", color = "";
+    decimal price = 0m, total = 0m, mileage = 0m;
     // Specialty vehicle variables
     bool isConvertable = false, hasSideCar = false, hasBedCover = false;
     decimal trunkSize = 0m, seatHeight = 0, bedSize = 0m;
@@ -135,6 +147,7 @@ static void ControlLoop()
                     "to create a pickup, or 4 to create a vehicle: ");
                 choice = int.Parse(Console.ReadLine());
 
+
                 // Get the common properties for the vehicle
                 // Read in the make of the vehicle
                 Console.WriteLine("Enter the make of the vehicle: ");
@@ -142,9 +155,15 @@ static void ControlLoop()
                 // Read in the model of the vehicle
                 Console.WriteLine("Enter the model of the vehicle: ");
                 model = Console.ReadLine();
+                // Read in the color of the vehicle
+                Console.WriteLine("Enter the color of the vehicle: ");
+                color = Console.ReadLine();
                 // Read in the year of the vehicle
                 Console.WriteLine("Enter the year of the vehicle: ");
                 year = int.Parse(Console.ReadLine());
+                // Read in the mileage of the vehicle
+                Console.WriteLine("Enter the mileage of the vehicle: ");
+                mileage = decimal.Parse(Console.ReadLine());
                 // Read in the price of the vehicle
                 Console.WriteLine("Enter the price of the vehicle: ");
                 price = decimal.Parse(Console.ReadLine());
@@ -164,7 +183,7 @@ static void ControlLoop()
                         Console.WriteLine("Enter the trunk size of the car in cubic feet: ");
                         trunkSize = decimal.Parse(Console.ReadLine());
                         // Create a new car
-                        vehicle = new CarModel(id, make, model, year, price, numWheels, isConvertable,
+                        vehicle = new CarModel(id, make, model, color, year, mileage, price, numWheels, isConvertable,
                             trunkSize);
                         break;
 
@@ -177,7 +196,7 @@ static void ControlLoop()
                         Console.WriteLine("Enter the seat height of the motorcycle in inches: ");
                         seatHeight = decimal.Parse(Console.ReadLine());
                         // Create a new motorcycle
-                        vehicle = new MotorcycleModel(id, make, model, year, price, numWheels, hasSideCar,
+                        vehicle = new MotorcycleModel(id, make, model, color, year, mileage, price, numWheels, hasSideCar,
                             seatHeight);
                         break;
 
@@ -190,14 +209,14 @@ static void ControlLoop()
                         Console.WriteLine("Enter the bed size of the pickup in cubic feet: ");
                         bedSize = decimal.Parse(Console.ReadLine());
                         // Create a new pickup
-                        vehicle = new PickupModel(id, make, model, year, price, numWheels, hasBedCover,
+                        vehicle = new PickupModel(id, make, model, color, year, mileage, price, numWheels, hasBedCover,
                             bedSize);
                         break;
 
                     // Vehicle
                     default:
                         // Create a new vehicle
-                        vehicle = new VehicleModel(id, make, model, year, price, numWheels);
+                        vehicle = new VehicleModel(id, make, model, color, year, mileage, price, numWheels);
                         break;
                 }
 
@@ -221,7 +240,7 @@ static void ControlLoop()
                 // Checkout the user
                 total = storeLogic.Checkout();
                 // Print out a success message
-                Console.WriteLine("The inventory has been saved to the text file");
+                Console.WriteLine("Your total is: $ " + total);
                 Console.WriteLine();
                 break;
 
@@ -239,7 +258,7 @@ static void ControlLoop()
                 // Use the business logic layer to load the inventory from a file
                 storeLogic.ReadInventory();
                 // Print out a success message
-                Console.WriteLine("The inventory has been loaded from the text file");
+                Console.WriteLine("The inventory has been read from the text file");
                 Console.WriteLine();
                 break;
         }
