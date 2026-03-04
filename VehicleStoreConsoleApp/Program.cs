@@ -85,6 +85,7 @@ static int ReadChoice()
 // Control the car store loop
 static void ControlLoop()
 {
+    // Create an instance of the validator class
     ValidatorClass validator = new ValidatorClass();
     // Create an instance of the store logic class
     StoreLogic storeLogic = new StoreLogic();

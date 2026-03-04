@@ -2,6 +2,14 @@
 using System.Numerics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
+/*
+ * Elijah Hodge
+ * CST - 250
+ * 3/1/2026
+ * Vehicle Class Library
+ * Activity 1
+ */
+
 namespace VehicleClassLibrary.Services.BusinessLogicLayer
 {
     public class ValidatorClass
@@ -174,7 +182,7 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
-        public static decimal GetValidDecimal(string entry, decimal? min = null, decimal? max = null)
+        public static decimal GetValidDecimal(string entry)
         {
             // Enter a while loop to ensure we get a valid entry
             while (true)
@@ -235,7 +243,7 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
                         // If so, throw an exception
                         throw new FormatException();
                     }
-                    // Parse the input to a boolean and return it if it is valid
+                    // Parse the input to a boolean and return it if is valid
                     return bool.Parse(input);
                 }
                 // Catch if the input is not a valid boolean
