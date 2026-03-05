@@ -323,6 +323,7 @@
             rdoVehicle.TabStop = true;
             rdoVehicle.Text = "Vehicle";
             rdoVehicle.UseVisualStyleBackColor = true;
+            rdoVehicle.Click += RdoVehicleClickEH;
             // 
             // rdoPickup
             // 
@@ -334,6 +335,7 @@
             rdoPickup.TabStop = true;
             rdoPickup.Text = "Pickup";
             rdoPickup.UseVisualStyleBackColor = true;
+            rdoPickup.Click += RdoPickupClickEH;
             // 
             // rdoMotercycle
             // 
@@ -345,6 +347,7 @@
             rdoMotercycle.TabStop = true;
             rdoMotercycle.Text = "Motercycle";
             rdoMotercycle.UseVisualStyleBackColor = true;
+            rdoMotercycle.Click += RdoMotercycleClickEH;
             // 
             // rdoCar
             // 
@@ -398,7 +401,7 @@
             // 
             // txtSpecialtyDecimal
             // 
-            txtSpecialtyDecimal.Location = new Point(115, 106);
+            txtSpecialtyDecimal.Location = new Point(129, 106);
             txtSpecialtyDecimal.Name = "txtSpecialtyDecimal";
             txtSpecialtyDecimal.Size = new Size(100, 23);
             txtSpecialtyDecimal.TabIndex = 4;
@@ -451,6 +454,7 @@
             btnCreate.TabIndex = 2;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += BtnCreateClickEH;
             // 
             // groupBox3
             // 
