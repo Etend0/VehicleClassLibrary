@@ -412,6 +412,7 @@
             txtSpecialtyDecimal.Name = "txtSpecialtyDecimal";
             txtSpecialtyDecimal.Size = new Size(100, 23);
             txtSpecialtyDecimal.TabIndex = 4;
+            txtSpecialtyDecimal.Leave += TxtDecimalLeaveEH;
             // 
             // lblSpecialtyDecimal
             // 
@@ -492,6 +493,7 @@
             btnAddToCart.TabIndex = 4;
             btnAddToCart.Text = "Add To Cart";
             btnAddToCart.UseVisualStyleBackColor = true;
+            btnAddToCart.Click += BtnAddToCartClickEH;
             // 
             // groupBox4
             // 
@@ -520,6 +522,7 @@
             btnCheckout.TabIndex = 5;
             btnCheckout.Text = "Checkout";
             btnCheckout.UseVisualStyleBackColor = true;
+            btnCheckout.Click += BtnCheckoutClickEH;
             // 
             // label10
             // 
