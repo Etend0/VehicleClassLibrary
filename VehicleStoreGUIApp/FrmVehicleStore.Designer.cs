@@ -38,14 +38,14 @@
             lblMakeError = new Label();
             lblVehicleTypeError = new Label();
             txtWheels = new TextBox();
-            txtMileage = new TextBox();
             txtPrice = new TextBox();
             txtYear = new TextBox();
+            txtMileage = new TextBox();
+            label6 = new Label();
             txtColor = new TextBox();
             txtModel = new TextBox();
             txtMake = new TextBox();
             label7 = new Label();
-            label6 = new Label();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
@@ -89,14 +89,14 @@
             groupBox1.Controls.Add(lblMakeError);
             groupBox1.Controls.Add(lblVehicleTypeError);
             groupBox1.Controls.Add(txtWheels);
-            groupBox1.Controls.Add(txtMileage);
             groupBox1.Controls.Add(txtPrice);
             groupBox1.Controls.Add(txtYear);
+            groupBox1.Controls.Add(txtMileage);
+            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(txtColor);
             groupBox1.Controls.Add(txtModel);
             groupBox1.Controls.Add(txtMake);
             groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label3);
@@ -129,7 +129,7 @@
             lblMileageError.AutoSize = true;
             lblMileageError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMileageError.ForeColor = Color.Red;
-            lblMileageError.Location = new Point(81, 384);
+            lblMileageError.Location = new Point(69, 342);
             lblMileageError.Name = "lblMileageError";
             lblMileageError.Size = new Size(160, 15);
             lblMileageError.TabIndex = 24;
@@ -140,7 +140,7 @@
             lblPriceError.AutoSize = true;
             lblPriceError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPriceError.ForeColor = Color.Red;
-            lblPriceError.Location = new Point(85, 340);
+            lblPriceError.Location = new Point(81, 385);
             lblPriceError.Name = "lblPriceError";
             lblPriceError.Size = new Size(144, 15);
             lblPriceError.TabIndex = 23;
@@ -207,20 +207,15 @@
             txtWheels.Name = "txtWheels";
             txtWheels.Size = new Size(100, 23);
             txtWheels.TabIndex = 17;
-            // 
-            // txtMileage
-            // 
-            txtMileage.Location = new Point(104, 358);
-            txtMileage.Name = "txtMileage";
-            txtMileage.Size = new Size(100, 23);
-            txtMileage.TabIndex = 16;
+            txtWheels.Leave += TxtWheelsLeaveEH;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(103, 314);
+            txtPrice.Location = new Point(104, 360);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
             txtPrice.TabIndex = 15;
+            txtPrice.Leave += TxtPriceLeaveEH;
             // 
             // txtYear
             // 
@@ -228,6 +223,24 @@
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(100, 23);
             txtYear.TabIndex = 14;
+            txtYear.Leave += TxtYearLeaveEH;
+            // 
+            // txtMileage
+            // 
+            txtMileage.Location = new Point(104, 316);
+            txtMileage.Name = "txtMileage";
+            txtMileage.Size = new Size(100, 23);
+            txtMileage.TabIndex = 16;
+            txtMileage.Leave += TxtMileageLeaveEH;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(17, 324);
+            label6.Name = "label6";
+            label6.Size = new Size(52, 15);
+            label6.TabIndex = 9;
+            label6.Text = "Mileage:";
             // 
             // txtColor
             // 
@@ -235,6 +248,7 @@
             txtColor.Name = "txtColor";
             txtColor.Size = new Size(100, 23);
             txtColor.TabIndex = 13;
+            txtColor.Leave += TxtColorLeaveEH;
             // 
             // txtModel
             // 
@@ -242,6 +256,7 @@
             txtModel.Name = "txtModel";
             txtModel.Size = new Size(100, 23);
             txtModel.TabIndex = 12;
+            txtModel.Leave += TxtModelLeaveEH;
             // 
             // txtMake
             // 
@@ -249,29 +264,21 @@
             txtMake.Name = "txtMake";
             txtMake.Size = new Size(100, 23);
             txtMake.TabIndex = 11;
+            txtMake.Leave += TxtMakeLeaveEH;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(20, 406);
+            label7.Location = new Point(17, 406);
             label7.Name = "label7";
             label7.Size = new Size(48, 15);
             label7.TabIndex = 10;
             label7.Text = "Wheels:";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(19, 361);
-            label6.Name = "label6";
-            label6.Size = new Size(52, 15);
-            label6.TabIndex = 9;
-            label6.Text = "Mileage:";
-            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(18, 317);
+            label5.Location = new Point(20, 368);
             label5.Name = "label5";
             label5.Size = new Size(36, 15);
             label5.TabIndex = 8;
@@ -425,6 +432,7 @@
             rdoSpecialtyNo.TabStop = true;
             rdoSpecialtyNo.Text = "No";
             rdoSpecialtyNo.UseVisualStyleBackColor = true;
+            rdoSpecialtyNo.Click += RdoSpecialtyBooleanClickEH;
             // 
             // rdoSpecialtyYes
             // 
@@ -436,6 +444,7 @@
             rdoSpecialtyYes.TabStop = true;
             rdoSpecialtyYes.Text = "Yes";
             rdoSpecialtyYes.UseVisualStyleBackColor = true;
+            rdoSpecialtyYes.Click += RdoSpecialtyBooleanClickEH;
             // 
             // lblSpecialtyBoolean
             // 
