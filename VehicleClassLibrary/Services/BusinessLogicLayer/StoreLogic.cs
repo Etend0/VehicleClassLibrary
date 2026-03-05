@@ -73,14 +73,25 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
         }
 
         /// <summary>
-        /// Add a vehicle to the shopping cart by the vehicles ID
+        /// Remove a vehicle from the shopping cart by the vehicles ID
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>
         public int RemoveVehicleFromCart(int vehicleId)
         {
-            // Call and return the AddVehicleToCart method in the DAO
+            // Call and return the RemoveVehicleFromCart method in the DAO
             return _storeDAO.RemoveVehicleFromCart(vehicleId);
+        }
+
+        /// <summary>
+        /// Remove a vehicle from the inventory by the vehicles ID
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public int RemoveVehicleFromInventory(int vehicleId)
+        {
+            // Call and return the RemoveVehicleFromCart method in the DAO
+            return _storeDAO.RemoveVehicleFromInventory(vehicleId);
         }
 
         /// <summary>

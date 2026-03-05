@@ -43,6 +43,10 @@ namespace VehicleStoreGUIApp
             lblSpecialtyBooleanError.Visible = false;
             lblSpecialtyDecimalError.Visible = false;
             lblVehicleExists.Visible = false;
+            lblNoLoad.Visible = false;
+            lblNoSave.Visible = false;
+            lblSaved.Visible = false;
+            lblLoad.Visible = false;
             // Initialize the store logic variable
             _storeLogic = new StoreLogic();
 
@@ -291,6 +295,7 @@ namespace VehicleStoreGUIApp
 
                     // Add the vehicle to the inventory
                     _storeLogic.AddVehicleToInventory(vehicle);
+
                     // Show the user a success message
                     MessageBox.Show($"The following car has been added to the inventory:\n{vehicle}");
 
@@ -767,18 +772,18 @@ namespace VehicleStoreGUIApp
                 return;
             }
 
-            // Grab the selected vehicle
-            VehicleModel selectedVehicle = (VehicleModel)lstShoppingCart.SelectedItem;
-
-            // Remove it from the cart
-            _storeLogic.RemoveVehicleFromCart(selectedVehicle.Id);
-
-            // Reset the bindings
-            _shoppingCartBindingSource.ResetBindings(false);
-
             // Check to see if the cart count is higher than 0, if so, move up from the previously deleted item to delete next if user wants to
             if (lstShoppingCart.Items.Count > 0)
             {
+                // Grab the selected vehicle
+                VehicleModel selectedVehicle = (VehicleModel)lstShoppingCart.SelectedItem;
+
+                // Remove it from the cart
+                _storeLogic.RemoveVehicleFromCart(selectedVehicle.Id);
+
+                // Reset the bindings
+                _shoppingCartBindingSource.ResetBindings(false);
+
                 // New index equal to one up from previous spot
                 int newIndex = Math.Min(lstShoppingCart.SelectedIndex, lstShoppingCart.Items.Count - 1);
                 // If our new index is still not 0, go ahead and set that as our index
@@ -786,6 +791,89 @@ namespace VehicleStoreGUIApp
                 {
                     // Replace old selected index
                     lstShoppingCart.SelectedIndex = newIndex;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Write vehicles to file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveInvClickEH(object sender, EventArgs e)
+        {
+            // Check if we actually have items to write to the inventory
+            if (lstInventory.Items.Count > 0)
+            {
+                // Write themo the text file
+                _storeLogic.WriteInventory();
+
+                // Show the correct lables
+                lblSaved.Visible = true;
+                lblNoSave.Visible = false;
+            }
+            else
+            {
+                // Show the correct lables
+                lblSaved.Visible = false;
+                lblNoSave.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Read vehicles from file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoadInvClickEH(object sender, EventArgs e)
+        {
+            // Read from the text file
+            _storeLogic.ReadInventory();
+
+            // Reset our bindings
+            _inventoryBindingSource.ResetBindings(false);
+
+            // Show the correct lables
+            lblLoad.Visible = true;
+            lblNoLoad.Visible = false;
+        }
+
+        /// <summary>
+        /// Click event to remove an item from the inventory
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRemoveFromInvClickEH(object sender, EventArgs e)
+        {
+            // Check to see if we've selected something to remove
+            if (lstInventory.SelectedItems.Count == null)
+            {
+                // Return otherwise
+                return;
+            }
+
+            // Check to see if the cart count is higher than 0, if so, move up from the previously deleted item to delete next if user wants to
+            if (lstInventory.Items.Count > 0)
+            {
+                // Grab the selected vehicle
+                VehicleModel selectedVehicle = (VehicleModel)lstInventory.SelectedItem;
+
+                // Remove it from the inventory
+                _storeLogic.RemoveVehicleFromInventory(selectedVehicle.Id);
+
+                // Reset the bindings
+                _inventoryBindingSource.ResetBindings(false);
+
+                // New index equal to one up from previous spot
+                int newIndex = Math.Min(lstInventory.SelectedIndex, lstInventory.Items.Count - 1);
+                // If our new index is still not 0, go ahead and set that as our index
+                if (newIndex > 0)
+                {
+                    // Replace old selected index
+                    lstInventory.SelectedIndex = newIndex;
+
+                    // Write changes to inventory
+                    _storeLogic.WriteInventory();
                 }
             }
         }

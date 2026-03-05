@@ -90,7 +90,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
         }
 
         /// <summary>
-        /// Add a vehicle to the shopping cart based on the vehicles id
+        /// Remove a vehicle from the shopping cart based on the vehicles id
         /// </summary>
         /// <param name="vehicleId"></param>
         /// <returns></returns>
@@ -108,6 +108,27 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
             }
             // Return the number of items in the shopping cart
             return _shoppingCart.Count;
+        }
+
+        /// <summary>
+        /// Remove a vehicle from the inventory based on the vehicles id
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public int RemoveVehicleFromInventory(int vehicleId)
+        {
+            // Loop through the inventory to find the correct vehicle
+            for (int i = 0; i < _inventory.Count; i++)
+            {
+                // Check if the inventory vehicle id matches the parameter
+                if (_inventory[i].Id == vehicleId)
+                {
+                    // If so, add the vehicle to the shopping cart
+                    _inventory.Remove(_inventory[i]);
+                }
+            }
+            // Return the number of items in the shopping cart
+            return _inventory.Count;
         }
 
         /// <summary>
@@ -199,64 +220,68 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
                     // Create a stream reader to read the file
                     using (StreamReader reader = new StreamReader(_filePath))
                     {
-                        // Split the line on a comma-space
-                        // Create a string array to put all the separate vehicle parts into
-                        parts = line.Split(", ");
-
-                        // Use the parts array to get the common data (make, model, color, year, mileage, price, numWheels)
-                        make = parts[1];
-                        model = parts[2];
-                        color = parts[3];
-                        // Parse the year of the vehicle
-                        year = ParseInteger(parts[4]);
-                        // Parse the mileage and price of the vehicle
-                        mileage = ParseInteger(parts[5]);
-                        price = ParseDecimal(parts[6]);
-                        // Parse the number of wheels on the vehicle
-                        numWheels = ParseInteger(parts[7]);
-
-                        // Use the first piece of data to create a switch for the specific model
-                        switch (parts[0])
+                        while ((line = reader.ReadLine()) != null)
                         {
-                            case "Car":
-                                // Parse the convertible status for the car
-                                isConvertable = ParseBool(parts[6]);
-                                // Parse the trunk size for the car
-                                trunkSize = ParseDecimal(parts[7]);
-                                // Create a new car using the read properties
-                                CarModel car = new CarModel(0, make, model, color, year, mileage, price, numWheels, isConvertable, trunkSize);
-                                // Add the car to the inventory
-                                AddVehicleToInventory(car);
-                                break;
+                            if (string.IsNullOrWhiteSpace(line)) continue;
+                            // Split the line on a comma-space
+                            // Create a string array to put all the separate vehicle parts into
+                            parts = line.Split(",");
 
-                            case "Motorcycle":
-                                // Parse the side car status for the motorcycle
-                                hasSideCar = ParseBool(parts[6]);
-                                // Parse the seat height for the motorcycle
-                                seatHeight = ParseDecimal(parts[7]);
-                                // Create a new motorcycle using the read properties
-                                MotorcycleModel motorcycle = new MotorcycleModel(0, make, model, color, year, mileage, price, numWheels, hasSideCar, seatHeight);
-                                // Add the motorcycle to the inventory
-                                AddVehicleToInventory(motorcycle);
-                                break;
+                            // Use the parts array to get the common data (make, model, color, year, mileage, price, numWheels)
+                            make = parts[1];
+                            model = parts[2];
+                            color = parts[3];
+                            // Parse the year of the vehicle
+                            year = ParseInteger(parts[4]);
+                            // Parse the mileage and price of the vehicle
+                            mileage = ParseDecimal(parts[5]);
+                            price = ParseDecimal(parts[6]);
+                            // Parse the number of wheels on the vehicle
+                            numWheels = ParseInteger(parts[7]);
 
-                            case "Pickup":
-                                // Parse the bed cover status for the pickup
-                                hasBedCover = ParseBool(parts[6]);
-                                // Parse the bed size for the pickup
-                                bedSize = ParseDecimal(parts[7]);
-                                // Create a new pickup using the read properties
-                                PickupModel pickup = new PickupModel(0, make, model, color, year, mileage, price, numWheels, hasBedCover, bedSize);
-                                // Add the pickup to the inventory
-                                AddVehicleToInventory(pickup);
-                                break;
+                            // Use the first piece of data to create a switch for the specific model
+                            switch (parts[0])
+                            {
+                                case "Car":
+                                    // Parse the convertible status for the car
+                                    isConvertable = ParseBool(parts[6]);
+                                    // Parse the trunk size for the car
+                                    trunkSize = ParseDecimal(parts[7]);
+                                    // Create a new car using the read properties
+                                    CarModel car = new CarModel(0, make, model, color, year, mileage, price, numWheels, isConvertable, trunkSize);
+                                    // Add the car to the inventory
+                                    AddVehicleToInventory(car);
+                                    break;
 
-                            default:
-                                // Create a new vehicle using the read properties
-                                VehicleModel vehicle = new VehicleModel(0, make, model, color, year, mileage, price, numWheels);
-                                // Add the vehicle to the inventory
-                                AddVehicleToInventory(vehicle);
-                                break;
+                                case "Motorcycle":
+                                    // Parse the side car status for the motorcycle
+                                    hasSideCar = ParseBool(parts[6]);
+                                    // Parse the seat height for the motorcycle
+                                    seatHeight = ParseDecimal(parts[7]);
+                                    // Create a new motorcycle using the read properties
+                                    MotorcycleModel motorcycle = new MotorcycleModel(0, make, model, color, year, mileage, price, numWheels, hasSideCar, seatHeight);
+                                    // Add the motorcycle to the inventory
+                                    AddVehicleToInventory(motorcycle);
+                                    break;
+
+                                case "Pickup":
+                                    // Parse the bed cover status for the pickup
+                                    hasBedCover = ParseBool(parts[6]);
+                                    // Parse the bed size for the pickup
+                                    bedSize = ParseDecimal(parts[7]);
+                                    // Create a new pickup using the read properties
+                                    PickupModel pickup = new PickupModel(0, make, model, color, year, mileage, price, numWheels, hasBedCover, bedSize);
+                                    // Add the pickup to the inventory
+                                    AddVehicleToInventory(pickup);
+                                    break;
+
+                                default:
+                                    // Create a new vehicle using the read properties
+                                    VehicleModel vehicle = new VehicleModel(0, make, model, color, year, mileage, price, numWheels);
+                                    // Add the vehicle to the inventory
+                                    AddVehicleToInventory(vehicle);
+                                    break;
+                            }
                         }
                     }
                 }

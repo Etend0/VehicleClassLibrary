@@ -66,6 +66,8 @@
             btnCreate = new Button();
             groupBox3 = new GroupBox();
             lstInventory = new ListBox();
+            lblLoad = new Label();
+            lblSaved = new Label();
             btnAddToCart = new Button();
             groupBox4 = new GroupBox();
             lstShoppingCart = new ListBox();
@@ -74,6 +76,11 @@
             lblTotal = new Label();
             btnRemoveFromCart = new Button();
             lblVehicleExists = new Label();
+            btnSaveInv = new Button();
+            BtnLoadInv = new Button();
+            btnRemoveFromInventory = new Button();
+            lblNoSave = new Label();
+            lblNoLoad = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -471,9 +478,11 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(lstInventory);
-            groupBox3.Location = new Point(311, 12);
+            groupBox3.Controls.Add(lblLoad);
+            groupBox3.Controls.Add(lblSaved);
+            groupBox3.Location = new Point(317, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(551, 507);
+            groupBox3.Size = new Size(501, 507);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Store Inventory";
@@ -484,12 +493,34 @@
             lstInventory.ItemHeight = 15;
             lstInventory.Location = new Point(6, 22);
             lstInventory.Name = "lstInventory";
-            lstInventory.Size = new Size(539, 469);
+            lstInventory.Size = new Size(488, 469);
             lstInventory.TabIndex = 0;
+            // 
+            // lblLoad
+            // 
+            lblLoad.AutoSize = true;
+            lblLoad.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLoad.ForeColor = Color.ForestGreen;
+            lblLoad.Location = new Point(191, 495);
+            lblLoad.Name = "lblLoad";
+            lblLoad.Size = new Size(109, 15);
+            lblLoad.TabIndex = 34;
+            lblLoad.Text = "Inventory Loaded!";
+            // 
+            // lblSaved
+            // 
+            lblSaved.AutoSize = true;
+            lblSaved.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSaved.ForeColor = Color.Green;
+            lblSaved.Location = new Point(5, 494);
+            lblSaved.Name = "lblSaved";
+            lblSaved.Size = new Size(103, 15);
+            lblSaved.TabIndex = 33;
+            lblSaved.Text = "Inventory Saved!";
             // 
             // btnAddToCart
             // 
-            btnAddToCart.Location = new Point(868, 226);
+            btnAddToCart.Location = new Point(824, 223);
             btnAddToCart.Name = "btnAddToCart";
             btnAddToCart.Size = new Size(76, 47);
             btnAddToCart.TabIndex = 4;
@@ -500,9 +531,9 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(lstShoppingCart);
-            groupBox4.Location = new Point(950, 12);
+            groupBox4.Location = new Point(906, 14);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(289, 507);
+            groupBox4.Size = new Size(489, 507);
             groupBox4.TabIndex = 4;
             groupBox4.TabStop = false;
             groupBox4.Text = "Store Inventory";
@@ -511,14 +542,14 @@
             // 
             lstShoppingCart.FormattingEnabled = true;
             lstShoppingCart.ItemHeight = 15;
-            lstShoppingCart.Location = new Point(6, 22);
+            lstShoppingCart.Location = new Point(6, 18);
             lstShoppingCart.Name = "lstShoppingCart";
-            lstShoppingCart.Size = new Size(277, 469);
+            lstShoppingCart.Size = new Size(488, 469);
             lstShoppingCart.TabIndex = 0;
             // 
             // btnCheckout
             // 
-            btnCheckout.Location = new Point(1059, 527);
+            btnCheckout.Location = new Point(1110, 530);
             btnCheckout.Name = "btnCheckout";
             btnCheckout.Size = new Size(75, 23);
             btnCheckout.TabIndex = 5;
@@ -529,16 +560,16 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(1059, 570);
+            label10.Location = new Point(1110, 573);
             label10.Name = "label10";
-            label10.Size = new Size(35, 15);
+            label10.Size = new Size(36, 15);
             label10.TabIndex = 6;
             label10.Text = "Total:";
             // 
             // lblTotal
             // 
             lblTotal.AutoSize = true;
-            lblTotal.Location = new Point(1101, 570);
+            lblTotal.Location = new Point(1152, 573);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(19, 15);
             lblTotal.TabIndex = 7;
@@ -546,7 +577,7 @@
             // 
             // btnRemoveFromCart
             // 
-            btnRemoveFromCart.Location = new Point(1245, 226);
+            btnRemoveFromCart.Location = new Point(1406, 226);
             btnRemoveFromCart.Name = "btnRemoveFromCart";
             btnRemoveFromCart.Size = new Size(76, 47);
             btnRemoveFromCart.TabIndex = 8;
@@ -559,23 +590,80 @@
             lblVehicleExists.AutoSize = true;
             lblVehicleExists.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblVehicleExists.ForeColor = Color.Red;
-            lblVehicleExists.Location = new Point(185, 474);
+            lblVehicleExists.Location = new Point(191, 474);
             lblVehicleExists.Name = "lblVehicleExists";
             lblVehicleExists.Size = new Size(126, 15);
             lblVehicleExists.TabIndex = 26;
             lblVehicleExists.Text = "Vehicle Already Exists";
             // 
+            // btnSaveInv
+            // 
+            btnSaveInv.Location = new Point(334, 525);
+            btnSaveInv.Name = "btnSaveInv";
+            btnSaveInv.Size = new Size(76, 47);
+            btnSaveInv.TabIndex = 27;
+            btnSaveInv.Text = "Save Inventory";
+            btnSaveInv.UseVisualStyleBackColor = true;
+            btnSaveInv.Click += btnSaveInvClickEH;
+            // 
+            // BtnLoadInv
+            // 
+            BtnLoadInv.Location = new Point(526, 525);
+            BtnLoadInv.Name = "BtnLoadInv";
+            BtnLoadInv.Size = new Size(76, 47);
+            BtnLoadInv.TabIndex = 28;
+            BtnLoadInv.Text = "Load Inventory";
+            BtnLoadInv.UseVisualStyleBackColor = true;
+            BtnLoadInv.Click += btnLoadInvClickEH;
+            // 
+            // btnRemoveFromInventory
+            // 
+            btnRemoveFromInventory.Location = new Point(711, 525);
+            btnRemoveFromInventory.Name = "btnRemoveFromInventory";
+            btnRemoveFromInventory.Size = new Size(91, 47);
+            btnRemoveFromInventory.TabIndex = 29;
+            btnRemoveFromInventory.Text = "Remove From Inventory";
+            btnRemoveFromInventory.UseVisualStyleBackColor = true;
+            btnRemoveFromInventory.Click += btnRemoveFromInvClickEH;
+            // 
+            // lblNoSave
+            // 
+            lblNoSave.AutoSize = true;
+            lblNoSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNoSave.ForeColor = Color.Red;
+            lblNoSave.Location = new Point(317, 575);
+            lblNoSave.Name = "lblNoSave";
+            lblNoSave.Size = new Size(108, 15);
+            lblNoSave.TabIndex = 30;
+            lblNoSave.Text = "No Items To Save!";
+            // 
+            // lblNoLoad
+            // 
+            lblNoLoad.AutoSize = true;
+            lblNoLoad.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblNoLoad.ForeColor = Color.Red;
+            lblNoLoad.Location = new Point(467, 575);
+            lblNoLoad.Name = "lblNoLoad";
+            lblNoLoad.Size = new Size(179, 15);
+            lblNoLoad.TabIndex = 31;
+            lblNoLoad.Text = "No Items In Inventory To Load!";
+            // 
             // FrmVehicleStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1338, 680);
+            ClientSize = new Size(1490, 670);
+            Controls.Add(lblNoLoad);
+            Controls.Add(lblNoSave);
+            Controls.Add(btnRemoveFromInventory);
+            Controls.Add(BtnLoadInv);
+            Controls.Add(btnSaveInv);
             Controls.Add(lblVehicleExists);
+            Controls.Add(groupBox4);
             Controls.Add(btnRemoveFromCart);
             Controls.Add(lblTotal);
             Controls.Add(label10);
             Controls.Add(btnCheckout);
-            Controls.Add(groupBox4);
             Controls.Add(btnAddToCart);
             Controls.Add(groupBox3);
             Controls.Add(btnCreate);
@@ -588,6 +676,7 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             groupBox4.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -641,5 +730,12 @@
         private Label lblSpecialtyBooleanError;
         private Button btnRemoveFromCart;
         private Label lblVehicleExists;
+        private Button btnSaveInv;
+        private Button BtnLoadInv;
+        private Button btnRemoveFromInventory;
+        private Label lblLoad;
+        private Label lblSaved;
+        private Label lblNoSave;
+        private Label lblNoLoad;
     }
 }
