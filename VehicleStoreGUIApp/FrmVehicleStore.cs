@@ -6,6 +6,7 @@
  * Activity 1
  */
 
+using System.Diagnostics;
 using VehicleClassLibrary.Models;
 using VehicleClassLibrary.Services.BusinessLogicLayer;
 
@@ -41,6 +42,7 @@ namespace VehicleStoreGUIApp
             lblWheelsError.Visible = false;
             lblSpecialtyBooleanError.Visible = false;
             lblSpecialtyDecimalError.Visible = false;
+            lblVehicleExists.Visible = false;
             // Initialize the store logic variable
             _storeLogic = new StoreLogic();
 
@@ -168,6 +170,11 @@ namespace VehicleStoreGUIApp
             decimal price = -1, mileage = -1, specialtyDecimal = -1;
             bool specialtyBoolean = false;
             VehicleModel vehicle;
+            VehicleModel testVehicle;
+
+            lblVehicleExists.Visible = false;
+            bool vehicleExists = false;
+            int details = 0;
 
             // Test for null/empty textboxes
             ValidateVehicleType();
@@ -186,53 +193,156 @@ namespace VehicleStoreGUIApp
                 isPriceValid && isMileageValid && isWheelsValid && isSpecialtyBooleanValid &&
                 isSpecialtyDecimalValid)
             {
-                // Create the vehicle object based on the selected type
-                switch (currentVehicleType)
+                Debug.WriteLine("Entering create car");
+                List<VehicleModel> list = _storeLogic.GetInventory();
+
+                int listSize = list.Count;
+
+                Debug.WriteLine("Vehicle does not exist in inventory.");
+
+                if (listSize > 0)
                 {
-                    // Create a new car
-                    case "Car":
-                        vehicle = new CarModel(id, make, model, color, year, mileage, price, wheels,
-                            specialtyBoolean, specialtyDecimal);
-                        break;
-                    // Create a new motorcycle
-                    case "Motorcycle":
-                        vehicle = new MotorcycleModel(id, make, model, color, year, mileage, price, wheels,
-                            specialtyBoolean, specialtyDecimal);
-                        break;
-                    // Create a new pickup
-                    case "Pickup":
-                        vehicle = new PickupModel(id, make, model, color, year, mileage, price, wheels,
-                            specialtyBoolean, specialtyDecimal);
-                        break;
-                    // Create a new vehicle
-                    default:
-                        vehicle = new VehicleModel(id, make, model, color, year, mileage, price, wheels);
-                        break;
+                    Debug.WriteLine($"Inventory contains {listSize} vehicles.");
+
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        Debug.WriteLine("Entered first Forloop");
+
+                        testVehicle = list[i];
+
+                        for (int j = 0; j < 6; j++)
+                        {
+                            Debug.WriteLine("Entered second Forloop");
+                            switch (j)
+                            {
+                                case 0:
+                                    if (make == testVehicle.Make)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Make matches{details}");
+                                    }
+                                    break;
+
+                                case 1:
+                                    if (model == testVehicle.Model)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Model matches{details}");
+                                    }
+                                    break;
+
+                                case 2:
+                                    if (color == testVehicle.Color)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Color matches{details}");
+                                    }
+                                    break;
+
+                                case 3:
+                                    if (year == testVehicle.Year)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Year matches{details}");
+                                    }
+                                    break;
+
+                                case 4:
+                                    if (wheels == testVehicle.NumWheels)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Wheels matches{details}");
+                                    }
+                                    break;
+
+                                case 5:
+                                    if (price == testVehicle.Price)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Price matches{details}");
+                                    }
+                                    break;
+
+                                case 6:
+                                    if (mileage == testVehicle.Mileage)
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Mileage matches{details}");
+                                    }
+                                    break;
+
+                                case 7:
+                                    if (specialtyBoolean == testVehicle[j])
+                                    {
+                                        details++;
+                                        Debug.WriteLine($"Mileage matches{details}");
+                                    }
+                                    break;
+                            }
+                        }
+                    }
                 }
 
-                // Add the vehicle to the inventory
-                _storeLogic.AddVehicleToInventory(vehicle);
-                // Show the user a success message
-                MessageBox.Show($"The following car has been added to the inventory:\n{vehicle}");
+                if (details == 6)
+                {
+                    vehicleExists = true;
+                }
 
-                // Clear the input fields
-                rdoCar.Checked = false;
-                rdoMotorcycle.Checked = false;
-                rdoPickup.Checked = false;
-                rdoVehicle.Checked = false;
-                txtMake.Clear();
-                txtModel.Clear();
-                txtColor.Clear();
-                txtYear.Clear();
-                txtMileage.Clear();
-                txtPrice.Clear();
-                txtWheels.Clear();
-                rdoSpecialtyYes.Checked = false;
-                rdoSpecialtyNo.Checked = false;
-                txtSpecialtyDecimal.Clear();
+                if (!vehicleExists)
+                {
+                    // Create the vehicle object based on the selected type
+                    switch (currentVehicleType)
+                    {
+                        // Create a new car
+                        case "Car":
+                            vehicle = new CarModel(id, make, model, color, year, mileage, price, wheels,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new motorcycle
+                        case "Motorcycle":
+                            vehicle = new MotorcycleModel(id, make, model, color, year, mileage, price, wheels,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new pickup
+                        case "Pickup":
+                            vehicle = new PickupModel(id, make, model, color, year, mileage, price, wheels,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new vehicle
+                        default:
+                            vehicle = new VehicleModel(id, make, model, color, year, mileage, price, wheels);
+                            break;
+                    }
 
-                // Refresh the list control
-                _inventoryBindingSource.ResetBindings(false);
+                    // Add the vehicle to the inventory
+                    _storeLogic.AddVehicleToInventory(vehicle);
+                    // Show the user a success message
+                    MessageBox.Show($"The following car has been added to the inventory:\n{vehicle}");
+
+                    // Clear the input fields
+                    rdoCar.Checked = false;
+                    rdoMotorcycle.Checked = false;
+                    rdoPickup.Checked = false;
+                    rdoVehicle.Checked = false;
+                    txtMake.Clear();
+                    txtModel.Clear();
+                    txtColor.Clear();
+                    txtYear.Clear();
+                    txtMileage.Clear();
+                    txtPrice.Clear();
+                    txtWheels.Clear();
+                    rdoSpecialtyYes.Checked = false;
+                    rdoSpecialtyNo.Checked = false;
+                    txtSpecialtyDecimal.Clear();
+
+                    // Refresh the list control
+                    _inventoryBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    // Show the error label
+                    lblVehicleExists.Visible = true;
+                }
             }
         }
 

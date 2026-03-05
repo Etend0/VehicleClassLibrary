@@ -73,6 +73,7 @@
             label10 = new Label();
             lblTotal = new Label();
             btnRemoveFromCart = new Button();
+            lblVehicleExists = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -553,11 +554,23 @@
             btnRemoveFromCart.UseVisualStyleBackColor = true;
             btnRemoveFromCart.Click += BtnRemoveFromCartEH;
             // 
+            // lblVehicleExists
+            // 
+            lblVehicleExists.AutoSize = true;
+            lblVehicleExists.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblVehicleExists.ForeColor = Color.Red;
+            lblVehicleExists.Location = new Point(185, 474);
+            lblVehicleExists.Name = "lblVehicleExists";
+            lblVehicleExists.Size = new Size(126, 15);
+            lblVehicleExists.TabIndex = 26;
+            lblVehicleExists.Text = "Vehicle Already Exists";
+            // 
             // FrmVehicleStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1080, 680);
+            Controls.Add(lblVehicleExists);
             Controls.Add(btnRemoveFromCart);
             Controls.Add(lblTotal);
             Controls.Add(label10);
@@ -627,5 +640,6 @@
         private Label lblSpecialtyDecimalError;
         private Label lblSpecialtyBooleanError;
         private Button btnRemoveFromCart;
+        private Label lblVehicleExists;
     }
 }
