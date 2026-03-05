@@ -473,7 +473,7 @@
             groupBox3.Controls.Add(lstInventory);
             groupBox3.Location = new Point(311, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(289, 507);
+            groupBox3.Size = new Size(551, 507);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Store Inventory";
@@ -484,12 +484,12 @@
             lstInventory.ItemHeight = 15;
             lstInventory.Location = new Point(6, 22);
             lstInventory.Name = "lstInventory";
-            lstInventory.Size = new Size(277, 469);
+            lstInventory.Size = new Size(539, 469);
             lstInventory.TabIndex = 0;
             // 
             // btnAddToCart
             // 
-            btnAddToCart.Location = new Point(606, 223);
+            btnAddToCart.Location = new Point(868, 226);
             btnAddToCart.Name = "btnAddToCart";
             btnAddToCart.Size = new Size(76, 47);
             btnAddToCart.TabIndex = 4;
@@ -500,7 +500,7 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(lstShoppingCart);
-            groupBox4.Location = new Point(698, 12);
+            groupBox4.Location = new Point(950, 12);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(289, 507);
             groupBox4.TabIndex = 4;
@@ -518,7 +518,7 @@
             // 
             // btnCheckout
             // 
-            btnCheckout.Location = new Point(807, 527);
+            btnCheckout.Location = new Point(1059, 527);
             btnCheckout.Name = "btnCheckout";
             btnCheckout.Size = new Size(75, 23);
             btnCheckout.TabIndex = 5;
@@ -529,16 +529,16 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(807, 570);
+            label10.Location = new Point(1059, 570);
             label10.Name = "label10";
-            label10.Size = new Size(36, 15);
+            label10.Size = new Size(35, 15);
             label10.TabIndex = 6;
             label10.Text = "Total:";
             // 
             // lblTotal
             // 
             lblTotal.AutoSize = true;
-            lblTotal.Location = new Point(849, 570);
+            lblTotal.Location = new Point(1101, 570);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(19, 15);
             lblTotal.TabIndex = 7;
@@ -546,7 +546,7 @@
             // 
             // btnRemoveFromCart
             // 
-            btnRemoveFromCart.Location = new Point(993, 226);
+            btnRemoveFromCart.Location = new Point(1245, 226);
             btnRemoveFromCart.Name = "btnRemoveFromCart";
             btnRemoveFromCart.Size = new Size(76, 47);
             btnRemoveFromCart.TabIndex = 8;
@@ -569,7 +569,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1080, 680);
+            ClientSize = new Size(1338, 680);
             Controls.Add(lblVehicleExists);
             Controls.Add(btnRemoveFromCart);
             Controls.Add(lblTotal);
