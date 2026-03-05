@@ -90,6 +90,27 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
         }
 
         /// <summary>
+        /// Add a vehicle to the shopping cart based on the vehicles id
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public int RemoveVehicleFromCart(int vehicleId)
+        {
+            // Loop through the inventory to find the correct vehicle
+            for (int i = 0; i < _inventory.Count; i++)
+            {
+                // Check if the inventory vehicle id matches the parameter
+                if (_inventory[i].Id == vehicleId)
+                {
+                    // If so, add the vehicle to the shopping cart
+                    _shoppingCart.Remove(_inventory[i]);
+                }
+            }
+            // Return the number of items in the shopping cart
+            return _shoppingCart.Count;
+        }
+
+        /// <summary>
         /// Write the inventory to a text file
         /// </summary>
         /// <returns></returns>

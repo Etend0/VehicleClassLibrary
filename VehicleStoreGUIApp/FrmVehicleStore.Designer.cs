@@ -53,7 +53,7 @@
             label1 = new Label();
             rdoVehicle = new RadioButton();
             rdoPickup = new RadioButton();
-            rdoMotercycle = new RadioButton();
+            rdoMotorcycle = new RadioButton();
             rdoCar = new RadioButton();
             groupBox2 = new GroupBox();
             lblSpecialtyDecimalError = new Label();
@@ -72,6 +72,7 @@
             btnCheckout = new Button();
             label10 = new Label();
             lblTotal = new Label();
+            btnRemoveFromCart = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -104,7 +105,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(rdoVehicle);
             groupBox1.Controls.Add(rdoPickup);
-            groupBox1.Controls.Add(rdoMotercycle);
+            groupBox1.Controls.Add(rdoMotorcycle);
             groupBox1.Controls.Add(rdoCar);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
@@ -344,17 +345,17 @@
             rdoPickup.UseVisualStyleBackColor = true;
             rdoPickup.Click += RdoPickupClickEH;
             // 
-            // rdoMotercycle
+            // rdoMotorcycle
             // 
-            rdoMotercycle.AutoSize = true;
-            rdoMotercycle.Location = new Point(102, 30);
-            rdoMotercycle.Name = "rdoMotercycle";
-            rdoMotercycle.Size = new Size(84, 19);
-            rdoMotercycle.TabIndex = 1;
-            rdoMotercycle.TabStop = true;
-            rdoMotercycle.Text = "Motercycle";
-            rdoMotercycle.UseVisualStyleBackColor = true;
-            rdoMotercycle.Click += RdoMotercycleClickEH;
+            rdoMotorcycle.AutoSize = true;
+            rdoMotorcycle.Location = new Point(102, 30);
+            rdoMotorcycle.Name = "rdoMotorcycle";
+            rdoMotorcycle.Size = new Size(85, 19);
+            rdoMotorcycle.TabIndex = 1;
+            rdoMotorcycle.TabStop = true;
+            rdoMotorcycle.Text = "Motorcycle";
+            rdoMotorcycle.UseVisualStyleBackColor = true;
+            rdoMotorcycle.Click += RdoMotorcycleClickEH;
             // 
             // rdoCar
             // 
@@ -542,11 +543,22 @@
             lblTotal.TabIndex = 7;
             lblTotal.Text = "$0";
             // 
+            // btnRemoveFromCart
+            // 
+            btnRemoveFromCart.Location = new Point(993, 226);
+            btnRemoveFromCart.Name = "btnRemoveFromCart";
+            btnRemoveFromCart.Size = new Size(76, 47);
+            btnRemoveFromCart.TabIndex = 8;
+            btnRemoveFromCart.Text = "Remove From Cart";
+            btnRemoveFromCart.UseVisualStyleBackColor = true;
+            btnRemoveFromCart.Click += BtnRemoveFromCartEH;
+            // 
             // FrmVehicleStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1080, 680);
+            Controls.Add(btnRemoveFromCart);
             Controls.Add(lblTotal);
             Controls.Add(label10);
             Controls.Add(btnCheckout);
@@ -580,7 +592,7 @@
         private Label label1;
         private RadioButton rdoVehicle;
         private RadioButton rdoPickup;
-        private RadioButton rdoMotercycle;
+        private RadioButton rdoMotorcycle;
         private RadioButton rdoCar;
         private TextBox txtModel;
         private TextBox txtMake;
@@ -614,5 +626,6 @@
         private Label lblWheelsError;
         private Label lblSpecialtyDecimalError;
         private Label lblSpecialtyBooleanError;
+        private Button btnRemoveFromCart;
     }
 }

@@ -86,13 +86,13 @@ namespace VehicleStoreGUIApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RdoMotercycleClickEH(object sender, EventArgs e)
+        private void RdoMotorcycleClickEH(object sender, EventArgs e)
         {
             // Update the selected vehicle variable
-            currentVehicleType = "Motercycle";
+            currentVehicleType = "Motorcycle";
 
             // Change the label for the specialty boolean
-            lblSpecialtyBoolean.Text = "Does the motercycle has a side car?";
+            lblSpecialtyBoolean.Text = "Does the Motorcycle has a side car?";
             // Change the label for the specialty decimal
             lblSpecialtyDecimal.Text = "Seat Height (inches):";
 
@@ -195,7 +195,7 @@ namespace VehicleStoreGUIApp
                             specialtyBoolean, specialtyDecimal);
                         break;
                     // Create a new motorcycle
-                    case "Motercycle":
+                    case "Motorcycle":
                         vehicle = new MotorcycleModel(id, make, model, color, year, mileage, price, wheels,
                             specialtyBoolean, specialtyDecimal);
                         break;
@@ -217,7 +217,7 @@ namespace VehicleStoreGUIApp
 
                 // Clear the input fields
                 rdoCar.Checked = false;
-                rdoMotercycle.Checked = false;
+                rdoMotorcycle.Checked = false;
                 rdoPickup.Checked = false;
                 rdoVehicle.Checked = false;
                 txtMake.Clear();
@@ -241,7 +241,7 @@ namespace VehicleStoreGUIApp
         /// </summary>
         private void ValidateVehicleType()
         {
-            if (rdoCar.Checked || rdoMotercycle.Checked || rdoPickup.Checked || rdoVehicle.Checked)
+            if (rdoCar.Checked || rdoMotorcycle.Checked || rdoPickup.Checked || rdoVehicle.Checked)
             {
                 // Hide the error label
                 lblVehicleTypeError.Visible = false;
@@ -665,6 +665,21 @@ namespace VehicleStoreGUIApp
             // Display the total to lblTotal with currency format
             lblTotal.Text = total.ToString("C");
             // Reset the bindings for the inventory and shopping cart binding source
+            _shoppingCartBindingSource.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Click event handler for the remove from cart button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRemoveFromCartEH(object sender, EventArgs e)
+        {
+            // Get the selected vehicle from the inventory list
+            VehicleModel vehicle = (VehicleModel)lstInventory.SelectedItem;
+            // Add the vehicle to the shopping cart
+            _storeLogic.RemoveVehicleFromCart(vehicle.Id);
+            // Reset the bindings for the shopping cart binding source
             _shoppingCartBindingSource.ResetBindings(false);
         }
     }
