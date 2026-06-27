@@ -1,3 +1,5 @@
+using VehicleClassLibrary.Models;
+
 namespace VehicleClassLibrary.Tests
 {
     public class StoreLogicTests
@@ -144,8 +146,8 @@ namespace VehicleClassLibrary.Tests
 
             // Assert: Verify that the total is approximately correct
             // (Allowing small variance for business logic such as discounts, taxes, ect.)
-            Assert.Equal(total >= (car1.Price + car2.Price) * 0.95m);
-            Assert.Equal(total <= (car1.Price + car2.Price) * 1.05m);
+            Assert.True(total >= (car1.Price + car2.Price) * 0.95m);
+            Assert.True(total <= (car1.Price + car2.Price) * 1.05m);
 
             // Assert: Verify that the shopping cart is now empty after checkout
             Assert.Empty(cartAfterCheckout);
