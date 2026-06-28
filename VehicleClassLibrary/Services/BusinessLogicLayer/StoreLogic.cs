@@ -16,7 +16,7 @@ using VehicleClassLibrary.Services.DataAccessLayer;
 
 namespace VehicleClassLibrary.Services.BusinessLogicLayer
 {
-    internal class StoreLogic
+    public class StoreLogic
     {
         // Declare class level variables
         private StoreDAO _storeDAO;
