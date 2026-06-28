@@ -326,7 +326,7 @@ namespace VehicleClassLibrary.Services.DataAccessLayer
         /// Get the total of the users shopping cart and clear the cart
         /// </summary>
         /// <returns></returns>
-        private decimal Checkout()
+        public decimal Checkout()
         {
             // Set up a variable to keep track of the carts total
             decimal total = 0m;

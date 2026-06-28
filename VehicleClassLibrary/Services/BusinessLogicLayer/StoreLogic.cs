@@ -90,5 +90,15 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
             // Call and return the ReadInventory method in the DAO
             return _storeDAO.ReadInventory();
         }
+
+        /// <summary>
+        /// Get the total of the users shopping cart and clear the cart
+        /// </summary>
+        /// <returns></returns>
+        public decimal Checkout()
+        {
+            // Call and return the Checkout method in the DAO
+            return _storeDAO.Checkout();
+        }
     }
 }

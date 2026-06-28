@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace VehicleClassLibrary.Models
 {
-    internal class MotorcycleModel : VehicleModel
+    public class MotorcycleModel : VehicleModel
     {
         // Class level properties
         public bool HasSidecar { get; set; }

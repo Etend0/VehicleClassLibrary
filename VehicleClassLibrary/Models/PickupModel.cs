@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace VehicleClassLibrary.Models
 {
-    internal class PickupModel : VehicleModel
+    public class PickupModel : VehicleModel
     {
         // Class level properties
         public bool HasBedCover { get; set; }
