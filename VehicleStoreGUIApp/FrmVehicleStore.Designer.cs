@@ -119,11 +119,11 @@
             lblMileageError.AutoSize = true;
             lblMileageError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblMileageError.ForeColor = Color.Red;
-            lblMileageError.Location = new Point(61, 382);
+            lblMileageError.Location = new Point(53, 384);
             lblMileageError.Name = "lblMileageError";
-            lblMileageError.Size = new Size(145, 15);
+            lblMileageError.Size = new Size(161, 15);
             lblMileageError.TabIndex = 26;
-            lblMileageError.Text = "Please enter a valid price";
+            lblMileageError.Text = "Please enter a valid mileage";
             // 
             // txtMileage
             // 
@@ -175,7 +175,7 @@
             lblWheelsError.AutoSize = true;
             lblWheelsError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblWheelsError.ForeColor = Color.Red;
-            lblWheelsError.Location = new Point(28, 340);
+            lblWheelsError.Location = new Point(41, 340);
             lblWheelsError.Name = "lblWheelsError";
             lblWheelsError.Size = new Size(186, 15);
             lblWheelsError.TabIndex = 20;
@@ -491,6 +491,7 @@
             btnAddToCart.TabIndex = 3;
             btnAddToCart.Text = "Add to Cart";
             btnAddToCart.UseVisualStyleBackColor = true;
+            btnAddToCart.Click += BtnAddToCartClickEH;
             // 
             // groupBox4
             // 
@@ -519,6 +520,7 @@
             btnCheckout.TabIndex = 4;
             btnCheckout.Text = "Checkout";
             btnCheckout.UseVisualStyleBackColor = true;
+            btnCheckout.Click += BtnCheckoutClickEH;
             // 
             // label8
             // 
