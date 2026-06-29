@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            lblMileageError = new Label();
+            txtMileage = new TextBox();
+            label9 = new Label();
+            lblColorError = new Label();
+            txtColor = new TextBox();
+            label7 = new Label();
             lblWheelsError = new Label();
             lblPriceError = new Label();
             lblYearError = new Label();
@@ -45,6 +51,7 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
+            label1 = new Label();
             rdoVehicle = new RadioButton();
             rdoPickup = new RadioButton();
             rdoMotorcycle = new RadioButton();
@@ -65,13 +72,6 @@
             btnCheckout = new Button();
             label8 = new Label();
             lblTotal = new Label();
-            label1 = new Label();
-            lblColorError = new Label();
-            txtColor = new TextBox();
-            label7 = new Label();
-            lblMileageError = new Label();
-            txtMileage = new TextBox();
-            label9 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -113,6 +113,62 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
+            // 
+            // lblMileageError
+            // 
+            lblMileageError.AutoSize = true;
+            lblMileageError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMileageError.ForeColor = Color.Red;
+            lblMileageError.Location = new Point(61, 382);
+            lblMileageError.Name = "lblMileageError";
+            lblMileageError.Size = new Size(145, 15);
+            lblMileageError.TabIndex = 26;
+            lblMileageError.Text = "Please enter a valid price";
+            // 
+            // txtMileage
+            // 
+            txtMileage.Location = new Point(88, 358);
+            txtMileage.Name = "txtMileage";
+            txtMileage.Size = new Size(100, 23);
+            txtMileage.TabIndex = 25;
+            txtMileage.Leave += TxtMileageLeaveEH;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(26, 361);
+            label9.Name = "label9";
+            label9.Size = new Size(52, 15);
+            label9.TabIndex = 24;
+            label9.Text = "Mileage:";
+            // 
+            // lblColorError
+            // 
+            lblColorError.AutoSize = true;
+            lblColorError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblColorError.ForeColor = Color.Red;
+            lblColorError.Location = new Point(61, 166);
+            lblColorError.Name = "lblColorError";
+            lblColorError.Size = new Size(116, 15);
+            lblColorError.TabIndex = 23;
+            lblColorError.Text = "Please enter a color";
+            // 
+            // txtColor
+            // 
+            txtColor.Location = new Point(88, 140);
+            txtColor.Name = "txtColor";
+            txtColor.Size = new Size(100, 23);
+            txtColor.TabIndex = 22;
+            txtColor.Leave += TxtColorLeaveEH;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(26, 143);
+            label7.Name = "label7";
+            label7.Size = new Size(39, 15);
+            label7.TabIndex = 21;
+            label7.Text = "Color:";
             // 
             // lblWheelsError
             // 
@@ -196,6 +252,7 @@
             txtWheels.Name = "txtWheels";
             txtWheels.Size = new Size(100, 23);
             txtWheels.TabIndex = 13;
+            txtWheels.Leave += TxtWheelsLeaveEH;
             // 
             // txtPrice
             // 
@@ -203,6 +260,7 @@
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
             txtPrice.TabIndex = 12;
+            txtPrice.Leave += TxtPriceLeaveEH;
             // 
             // txtYear
             // 
@@ -210,6 +268,7 @@
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(100, 23);
             txtYear.TabIndex = 11;
+            txtYear.Leave += TxtYearLeaveEH;
             // 
             // txtModel
             // 
@@ -217,6 +276,7 @@
             txtModel.Name = "txtModel";
             txtModel.Size = new Size(100, 23);
             txtModel.TabIndex = 10;
+            txtModel.Leave += TxtModelLeaveEH;
             // 
             // txtMake
             // 
@@ -224,6 +284,7 @@
             txtMake.Name = "txtMake";
             txtMake.Size = new Size(100, 23);
             txtMake.TabIndex = 9;
+            txtMake.Leave += TxtMakeLeaveEH;
             // 
             // label5
             // 
@@ -260,6 +321,15 @@
             label2.Size = new Size(44, 15);
             label2.TabIndex = 5;
             label2.Text = "Model:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(26, 99);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Make:";
             // 
             // rdoVehicle
             // 
@@ -467,69 +537,6 @@
             lblTotal.Size = new Size(19, 15);
             lblTotal.TabIndex = 6;
             lblTotal.Text = "$0";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(26, 99);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 15);
-            label1.TabIndex = 4;
-            label1.Text = "Make:";
-            // 
-            // lblColorError
-            // 
-            lblColorError.AutoSize = true;
-            lblColorError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblColorError.ForeColor = Color.Red;
-            lblColorError.Location = new Point(61, 166);
-            lblColorError.Name = "lblColorError";
-            lblColorError.Size = new Size(116, 15);
-            lblColorError.TabIndex = 23;
-            lblColorError.Text = "Please enter a color";
-            // 
-            // txtColor
-            // 
-            txtColor.Location = new Point(88, 140);
-            txtColor.Name = "txtColor";
-            txtColor.Size = new Size(100, 23);
-            txtColor.TabIndex = 22;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(26, 143);
-            label7.Name = "label7";
-            label7.Size = new Size(39, 15);
-            label7.TabIndex = 21;
-            label7.Text = "Color:";
-            // 
-            // lblMileageError
-            // 
-            lblMileageError.AutoSize = true;
-            lblMileageError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblMileageError.ForeColor = Color.Red;
-            lblMileageError.Location = new Point(61, 382);
-            lblMileageError.Name = "lblMileageError";
-            lblMileageError.Size = new Size(145, 15);
-            lblMileageError.TabIndex = 26;
-            lblMileageError.Text = "Please enter a valid price";
-            // 
-            // txtMileage
-            // 
-            txtMileage.Location = new Point(88, 358);
-            txtMileage.Name = "txtMileage";
-            txtMileage.Size = new Size(100, 23);
-            txtMileage.TabIndex = 25;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(26, 361);
-            label9.Name = "label9";
-            label9.Size = new Size(52, 15);
-            label9.TabIndex = 24;
-            label9.Text = "Mileage:";
             // 
             // FrmVehicleStore
             // 

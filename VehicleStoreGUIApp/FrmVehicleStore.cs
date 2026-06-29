@@ -70,6 +70,8 @@ namespace VehicleStoreGUIApp
             // Show the specialty decimal label and text box
             lblSpecialtyDecimal.Visible = true;
             txtSpecialtyDecimal.Visible = true;
+            // Validate the vehicle type
+            ValidateVehicleType();
         }
 
         /// <summary>
@@ -94,6 +96,8 @@ namespace VehicleStoreGUIApp
             // Show the specialty decimal label and text box
             lblSpecialtyDecimal.Visible = true;
             txtSpecialtyDecimal.Visible = true;
+            // Validate the vehicle type
+            ValidateVehicleType();
         }
 
         /// <summary>
@@ -118,6 +122,8 @@ namespace VehicleStoreGUIApp
             // Show the specialty decimal label and text box
             lblSpecialtyDecimal.Visible = true;
             txtSpecialtyDecimal.Visible = true;
+            // Validate the vehicle type
+            ValidateVehicleType();
         }
 
         /// <summary>
@@ -137,6 +143,8 @@ namespace VehicleStoreGUIApp
             // Show the specialty decimal label and text box
             lblSpecialtyDecimal.Visible = false;
             txtSpecialtyDecimal.Visible = false;
+            // Validate the vehicle type
+            ValidateVehicleType();
         }
 
         /// <summary>
@@ -521,6 +529,83 @@ namespace VehicleStoreGUIApp
             }
             // Return the specialty decimal
             return specialtyDecimalValue;
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtMakeLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the make textbox
+            ValidateTxtMake();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtColorLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the color textbox
+            ValidateTxtColor();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtModelLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the model textbox
+            ValidateTxtModel();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtYearLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the year textbox
+            ValidateTxtYear();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtPriceLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the price textbox
+            ValidateTxtPrice();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtWheelsLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the wheels textbox
+            ValidateTxtWheels();
+        }
+
+        /// <summary>
+        /// Leave event handler to validate input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtMileageLeaveEH(object sender, EventArgs e)
+        {
+            // Validate the mileage textbox
+            ValidateTxtMileage();
         }
     }
 }
