@@ -40,8 +40,8 @@ namespace VehicleClassLibrary.Models
         /// <param name="numWheels"></param>
         /// <param name="isConvertable"></param>
         /// <param name="trunkSize"></param>
-        public CarModel(int id, string make, string model, int year, decimal price, int numWheels, bool isConvertable,
-          decimal trunkSize) : base(id, make, model, year, price, numWheels)
+        public CarModel(int id, string make, string model, int year, decimal price, int numWheels, int miles, string color, bool isConvertable,
+          decimal trunkSize) : base(id, make, model, year, price, numWheels, miles, color)
         {
             IsConvertable = isConvertable;
             TrunkSize = trunkSize;
@@ -59,7 +59,7 @@ namespace VehicleClassLibrary.Models
 
             // Print the car in the following format
             // 1: 2019 Jeep Wrangler with 4 wheels and a 14.7 cubic foot truck with(out) a convertible top - $27000.00
-            return $"{Id}: {Year} {Model} with {NumWheels} wheels and a {TrunkSize} cubic foot trunk {convertible} a convertible top - {Price:C2}";
+            return $"{Id}: {Year} {Color} {Make} {Model} with {NumWheels} wheels, {Mileage} miles and a {TrunkSize} cubic foot trunk {convertible} a convertible top - {Price:C2}";
         }
     }
 }

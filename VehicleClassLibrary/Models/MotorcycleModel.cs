@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,8 +41,8 @@ namespace VehicleClassLibrary.Models
         /// <param name="numWheels"></param>
         /// <param name="hasSidecar"></param>
         /// <param name="seatHeight"></param>
-        public MotorcycleModel(int id, string make, string model, int year, decimal price, int numWheels, bool hasSidecar,
-          decimal seatHeight) : base(id, make, model, year, price, numWheels)
+        public MotorcycleModel(int id, string make, string model, int year, decimal price, int numWheels, int miles, string color, bool hasSidecar,
+          decimal seatHeight) : base(id, make, model, year, price, numWheels, miles, color)
         {
             HasSidecar = hasSidecar;
             SeatHeight = seatHeight;
@@ -58,7 +59,7 @@ namespace VehicleClassLibrary.Models
             string sidecar = HasSidecar ? "with" : "without";
             // Print the motorcycle in the following format
             // 1: 2015 Yamaha Bolt with 2 wheels and a 44.1 inch seat with(out) a side car - $8000.00
-            return $"{Id}: {Year} {Model} with {NumWheels} wheels and a {SeatHeight} inch seat {sidecar} a side car - {Price:C2}";
+            return $"{Id}: {Year} {Color} {Make} {Model} with {NumWheels} wheels, {Mileage} miles and a {SeatHeight} inch seat {sidecar} a side car - {Price:C2}";
         }
     }
 }

@@ -23,6 +23,8 @@ namespace VehicleClassLibrary.Models
         public int Year { get; set; }
         public decimal Price { get; set; }
         public int NumWheels { get; set; }
+        public int Mileage { get; set; }
+        public string Color { get; set; }
 
         /// <summary>
         /// Default constructor for a vehicle model
@@ -35,6 +37,8 @@ namespace VehicleClassLibrary.Models
             Year = 0;
             Price = 0m;
             NumWheels = 0;
+            Mileage = 0;
+            Color = "Unkown";
         }
 
         /// <summary>
@@ -46,7 +50,7 @@ namespace VehicleClassLibrary.Models
         /// <param name="year"></param>
         /// <param name="price"></param>
         /// <param name="numWheels"></param>
-        public VehicleModel(int id, string make, string model, int year, decimal price, int numWheels)
+        public VehicleModel(int id, string make, string model, int year, decimal price, int numWheels, int miles, string color)
         {
             Id = id;
             Make = make;
@@ -54,6 +58,8 @@ namespace VehicleClassLibrary.Models
             Year = year;
             Price = price;
             NumWheels = numWheels;
+            Mileage = miles;
+            Color = color;
         }
 
         /// <summary>
@@ -62,7 +68,7 @@ namespace VehicleClassLibrary.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"{Id}: {Year} {Model} with {NumWheels} wheels - {Price:C2}";
+            return $"{Id}: {Year} {Color} {Make} {Model} with {NumWheels} wheels and {Mileage} miles - {Price:C2}";
         }
     }
 }
