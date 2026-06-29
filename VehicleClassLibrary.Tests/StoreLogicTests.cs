@@ -1,4 +1,5 @@
 using VehicleClassLibrary.Models;
+using VehicleClassLibrary.Services.BusinessLogicLayer;
 
 namespace VehicleClassLibrary.Tests
 {
@@ -20,6 +21,8 @@ namespace VehicleClassLibrary.Tests
                 Year = 2020,
                 Price = 25000m,
                 NumWheels = 4,
+                Mileage = 15000,
+                Color = "Blue",
                 IsConvertable = true,
                 TrunkSize = 2.5m
             };
@@ -65,6 +68,8 @@ namespace VehicleClassLibrary.Tests
                 Year = 2019,
                 Price = 20000m,
                 NumWheels = 4,
+                Mileage = 15000,
+                Color = "Blue",
                 IsConvertable = true,
                 TrunkSize = 2.5m
             };
@@ -114,6 +119,8 @@ namespace VehicleClassLibrary.Tests
                 Year = 2021,
                 Price = 40000m,
                 NumWheels = 4,
+                Mileage = 15000,
+                Color = "Blue",
                 IsConvertable = true,
                 TrunkSize = 2.5m
             };
@@ -126,6 +133,8 @@ namespace VehicleClassLibrary.Tests
                 Year = 2022,
                 Price = 45000m,
                 NumWheels = 4,
+                Mileage = 15000,
+                Color = "Blue",
                 IsConvertable = true,
                 TrunkSize = 2.5m
             };
@@ -135,8 +144,8 @@ namespace VehicleClassLibrary.Tests
             store.AddVehicleToInventory(car2);
 
             // Add both vehicles to the shopping cart
-            store.AddVehicleToCart(car1);
-            store.AddVehicleToCart(car2);
+            store.AddVehicleToCart(car1.Id);
+            store.AddVehicleToCart(car2.Id);
 
             // Act: Perform the checkout operation
             decimal total = store.Checkout();

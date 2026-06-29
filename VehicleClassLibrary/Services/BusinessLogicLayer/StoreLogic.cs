@@ -73,6 +73,17 @@ namespace VehicleClassLibrary.Services.BusinessLogicLayer
         }
 
         /// <summary>
+        /// Remove a vehicle from the shopping cart by the vehicles ID
+        /// </summary>
+        /// <param name="vehicleId"></param>
+        /// <returns></returns>
+        public int RemoveVehicleFromCart(int vehicleId)
+        {
+            // Call and return the RemoveVehicleFromCart method in the DAO
+            return _storeDAO.RemoveVehicleFromCart(vehicleId);
+        }
+
+        /// <summary>
         /// Write the inventory to a text file
         /// </summary>
         public void WriteInventory()

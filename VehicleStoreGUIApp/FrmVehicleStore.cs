@@ -42,6 +42,12 @@ namespace VehicleStoreGUIApp
             lblWheelsError.Visible = false;
             lblSpecialtyBooleanError.Visible = false;
             lblSpecialtyDecimalError.Visible = false;
+            lblVehicleExists.Visible = false;
+            lblSaved.Visible = false;
+            lblNoSave.Visible = false;
+            lblLoad.Visible = false;
+            lblNoLoad.Visible = false;
+
             // Initialize the store logic variable
             _storeLogic = new StoreLogic();
 
@@ -160,11 +166,6 @@ namespace VehicleStoreGUIApp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// <summary>
-        /// Click event handler to create a new vehicle
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void BtnCreateClickEH(object sender, EventArgs e)
         {
             // Declare and initialize variables
@@ -175,11 +176,13 @@ namespace VehicleStoreGUIApp
             bool specialtyBoolean = false;
             VehicleModel vehicle;
 
+            lblVehicleExists.Visible = false;
+
             // Test for null/empty textboxes
             ValidateVehicleType();
             make = ValidateTxtMake();
-            color = ValidateTxtColor();
             model = ValidateTxtModel();
+            color = ValidateTxtColor();
             year = ValidateTxtYear();
             wheels = ValidateTxtWheels();
             price = ValidateTxtPrice();
@@ -187,53 +190,141 @@ namespace VehicleStoreGUIApp
             specialtyBoolean = ValidateSpecialtyBoolean();
             specialtyDecimal = ValidateSpecialtyDecimal();
 
-            // Create the vehicle object based on the selected type
-            switch (currentVehicleType)
+            // Check the state of the flags
+            if (isVehicleTypeValid && isMakeValid && isModelValid && isColorValid && isYearValid &&
+                isPriceValid && isMileageValid && isWheelsValid && isSpecialtyBooleanValid &&
+                isSpecialtyDecimalValid)
             {
-                // Create a new car
-                case "Car":
-                    vehicle = new CarModel(id, make, model, year, price, wheels, mileage, color,
-                        specialtyBoolean, specialtyDecimal);
-                    break;
-                // Create a new motorcycle
-                case "Motorcycle":
-                    vehicle = new MotorcycleModel(id, make, model, year, price, wheels, mileage, color,
-                        specialtyBoolean, specialtyDecimal);
-                    break;
-                // Create a new pickup
-                case "Pickup":
-                    vehicle = new PickupModel(id, make, model, year, price, wheels, mileage, color,
-                        specialtyBoolean, specialtyDecimal);
-                    break;
-                // Create a new vehicle
-                default:
-                    vehicle = new VehicleModel(id, make, model, year, price, wheels, mileage, color);
-                    break;
+                // Grab our current inventory list
+                List<VehicleModel> list = _storeLogic.GetInventory();
+
+                // Grab the size of the list and set the bool to false as we have no match
+                int listSize = list.Count;
+                bool vehicleExists = false;
+
+                // We only want to be able to do this check if the list size is not zero, otherwise we will get an error trying to loop through an empty list
+                if (listSize > 0)
+                {
+                    // Enter a for loop to check for a match through the inventory
+                    for (int i = 0; i < listSize; i++)
+                    {
+                        // Set the matching details to 0
+                        int details = 0;
+                        // Grab the current vehicle to test
+                        VehicleModel testVehicle = list[i];
+
+                        // Check if the types match
+                        string testType = testVehicle.GetType().Name.Replace("Model", "");
+                        // If the current vehicle is not the VehicleModel type, move on. Otherwise continue
+                        if (currentVehicleType != testType)
+                        {
+                            continue;
+                        }
+
+                        // Compare each detail to see how many match
+                        if (make == testVehicle.Make) details++;
+                        if (model == testVehicle.Model) details++;
+                        if (color == testVehicle.Color) details++;
+                        if (year == testVehicle.Year) details++;
+                        if (wheels == testVehicle.NumWheels) details++;
+                        if (price == testVehicle.Price) details++;
+                        if (mileage == testVehicle.Mileage) details++;
+
+                        // If we get seven matchs with the base vehicle, there's a duplicate
+                        int matchingDetails = 7;
+
+                        // Check other vehicle types
+                        if (currentVehicleType != "Vehicle")
+                        {
+                            // Check the car types extra details
+                            if (testVehicle is CarModel car && currentVehicleType == "Car")
+                            {
+                                if (specialtyBoolean == car.IsConvertable) details++;
+                                if (specialtyDecimal == car.TrunkSize) details++;
+                            }
+                            // Check the motorcycle types extra details
+                            else if (testVehicle is MotorcycleModel moto && currentVehicleType == "Motorcycle")
+                            {
+                                if (specialtyBoolean == moto.HasSidecar) details++;
+                                if (specialtyDecimal == moto.SeatHeight) details++;
+                            }
+                            // Check the pickup types extra details
+                            else if (testVehicle is PickupModel pickup && currentVehicleType == "Pickup")
+                            {
+                                if (specialtyBoolean == pickup.HasBedCover) details++;
+                                if (specialtyDecimal == pickup.BedSize) details++;
+                            }
+                            // If we are not working with the base vehicle model, we need to compensate for the extra details in our required details count
+                            matchingDetails += 2;
+                        }
+
+                        // If we match the number of matching details, it's a dupliatem, don't add it to the inventory and show the error label
+                        if (details == matchingDetails)
+                        {
+                            vehicleExists = true;
+                            break;
+                        }
+                    }
+                }
+
+                // The vehicle does not exist, go ahead and create it and add it to the inventory
+                if (!vehicleExists)
+                {
+                    // Create the vehicle object based on the selected type
+                    switch (currentVehicleType)
+                    {
+                        // Create a new car
+                        case "Car":
+                            vehicle = new CarModel(id, make, model, year, price, wheels, mileage, color,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new motorcycle
+                        case "Motorcycle":
+                            vehicle = new MotorcycleModel(id, make, model, year, price, wheels, mileage, color,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new pickup
+                        case "Pickup":
+                            vehicle = new PickupModel(id, make, model, year, price, wheels, mileage, color,
+                                specialtyBoolean, specialtyDecimal);
+                            break;
+                        // Create a new vehicle
+                        default:
+                            vehicle = new VehicleModel(id, make, model, year, price, wheels, mileage, color);
+                            break;
+                    }
+
+                    // Add the vehicle to the inventory
+                    _storeLogic.AddVehicleToInventory(vehicle);
+
+                    // Show the user a success message
+                    MessageBox.Show($"The following car has been added to the inventory:\n{vehicle}");
+
+                    // Clear the input fields
+                    rdoCar.Checked = false;
+                    rdoMotorcycle.Checked = false;
+                    rdoPickup.Checked = false;
+                    rdoVehicle.Checked = false;
+                    txtMake.Clear();
+                    txtModel.Clear();
+                    txtColor.Clear();
+                    txtYear.Clear();
+                    txtMileage.Clear();
+                    txtPrice.Clear();
+                    txtWheels.Clear();
+                    rdoSpecialtyYes.Checked = false;
+                    rdoSpecialtyNo.Checked = false;
+                    txtSpecialtyDecimal.Clear();
+
+                    // Refresh the list control
+                    _inventoryBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    // If the vehicle does exist, do not add it to the inventory and show the error label
+                    lblVehicleExists.Visible = true;
+                }
             }
-
-            // Add the vehicle to the inventory
-            _storeLogic.AddVehicleToInventory(vehicle);
-            // Show the user a success message
-            MessageBox.Show($"The following car has been added to the inventory:\n{vehicle}");
-
-            // Clear the input fields
-            rdoCar.Checked = false;
-            rdoMotorcycle.Checked = false;
-            rdoPickup.Checked = false;
-            rdoVehicle.Checked = false;
-            txtMake.Clear();
-            txtModel.Clear();
-            txtColor.Clear();
-            txtYear.Clear();
-            txtMileage.Clear();
-            txtPrice.Clear();
-            txtWheels.Clear();
-            rdoSpecialtyYes.Checked = false;
-            rdoSpecialtyNo.Checked = false;
-            txtSpecialtyDecimal.Clear();
-
-            // Reset the list control
-            _inventoryBindingSource.ResetBindings(false);
         }
 
         /// <summary>
@@ -645,5 +736,86 @@ namespace VehicleStoreGUIApp
             // Reset the bindings for the inventory and shopping cart binding source
             _shoppingCartBindingSource.ResetBindings(false);
         }
+
+        /// <summary>
+        /// Click event handler for the remove from cart button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRemoveFromCartEH(object sender, EventArgs e)
+        {
+            // Check to see if we've selected something to remove
+            if (lstShoppingCart.SelectedItems.Count == null)
+            {
+                // Return otherwise
+                return;
+            }
+
+            // Check to see if the cart count is higher than 0, if so, move up from the previously deleted item to delete next if user wants to
+            if (lstShoppingCart.Items.Count > 0)
+            {
+                // Grab the selected vehicle
+                VehicleModel selectedVehicle = (VehicleModel)lstShoppingCart.SelectedItem;
+
+                // Remove it from the cart
+                _storeLogic.RemoveVehicleFromCart(selectedVehicle.Id);
+
+                // Reset the bindings
+                _shoppingCartBindingSource.ResetBindings(false);
+
+                // New index equal to one up from previous spot
+                int newIndex = Math.Min(lstShoppingCart.SelectedIndex, lstShoppingCart.Items.Count - 1);
+                // If our new index is still not 0, go ahead and set that as our index
+                if (newIndex > 0)
+                {
+                    // Replace old selected index
+                    lstShoppingCart.SelectedIndex = newIndex;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Write vehicles to file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSaveInvClickEH(object sender, EventArgs e)
+        {
+            // Check if we actually have items to write to the inventory
+            if (lstInventory.Items.Count > 0)
+            {
+                // Write them to the text file
+                _storeLogic.WriteInventory();
+
+                // Show the correct lables
+                lblSaved.Visible = true;
+                lblNoSave.Visible = false;
+            }
+            else
+            {
+                // Show the correct lables
+                lblSaved.Visible = false;
+                lblNoSave.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Read vehicles from file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnLoadInvClickEH(object sender, EventArgs e)
+        {
+            // Read from the text file
+            _storeLogic.ReadInventory();
+
+            // Reset our bindings
+            _inventoryBindingSource.ResetBindings(false);
+
+            // Show the correct lables
+            lblLoad.Visible = true;
+            lblNoLoad.Visible = false;
+        }
+
     }
 }
