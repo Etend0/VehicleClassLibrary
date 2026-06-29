@@ -45,7 +45,6 @@
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
-            label1 = new Label();
             rdoVehicle = new RadioButton();
             rdoPickup = new RadioButton();
             rdoMotorcycle = new RadioButton();
@@ -66,6 +65,13 @@
             btnCheckout = new Button();
             label8 = new Label();
             lblTotal = new Label();
+            label1 = new Label();
+            lblColorError = new Label();
+            txtColor = new TextBox();
+            label7 = new Label();
+            lblMileageError = new Label();
+            txtMileage = new TextBox();
+            label9 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -74,6 +80,12 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(lblMileageError);
+            groupBox1.Controls.Add(txtMileage);
+            groupBox1.Controls.Add(label9);
+            groupBox1.Controls.Add(lblColorError);
+            groupBox1.Controls.Add(txtColor);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(lblWheelsError);
             groupBox1.Controls.Add(lblPriceError);
             groupBox1.Controls.Add(lblYearError);
@@ -97,7 +109,7 @@
             groupBox1.Controls.Add(rdoCar);
             groupBox1.Location = new Point(10, 11);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(261, 352);
+            groupBox1.Size = new Size(261, 463);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
@@ -107,7 +119,7 @@
             lblWheelsError.AutoSize = true;
             lblWheelsError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblWheelsError.ForeColor = Color.Red;
-            lblWheelsError.Location = new Point(41, 296);
+            lblWheelsError.Location = new Point(28, 340);
             lblWheelsError.Name = "lblWheelsError";
             lblWheelsError.Size = new Size(186, 15);
             lblWheelsError.TabIndex = 20;
@@ -118,7 +130,7 @@
             lblPriceError.AutoSize = true;
             lblPriceError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPriceError.ForeColor = Color.Red;
-            lblPriceError.Location = new Point(61, 252);
+            lblPriceError.Location = new Point(61, 296);
             lblPriceError.Name = "lblPriceError";
             lblPriceError.Size = new Size(145, 15);
             lblPriceError.TabIndex = 19;
@@ -129,7 +141,7 @@
             lblYearError.AutoSize = true;
             lblYearError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblYearError.ForeColor = Color.Red;
-            lblYearError.Location = new Point(61, 210);
+            lblYearError.Location = new Point(61, 254);
             lblYearError.Name = "lblYearError";
             lblYearError.Size = new Size(141, 15);
             lblYearError.TabIndex = 18;
@@ -140,7 +152,7 @@
             lblModelError.AutoSize = true;
             lblModelError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblModelError.ForeColor = Color.Red;
-            lblModelError.Location = new Point(61, 166);
+            lblModelError.Location = new Point(61, 210);
             lblModelError.Name = "lblModelError";
             lblModelError.Size = new Size(123, 15);
             lblModelError.TabIndex = 17;
@@ -170,37 +182,38 @@
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(88, 314);
+            btnCreate.Location = new Point(88, 425);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(75, 23);
             btnCreate.TabIndex = 14;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = true;
+            btnCreate.Click += BtnCreateClickEH;
             // 
             // txtWheels
             // 
-            txtWheels.Location = new Point(88, 270);
+            txtWheels.Location = new Point(88, 314);
             txtWheels.Name = "txtWheels";
             txtWheels.Size = new Size(100, 23);
             txtWheels.TabIndex = 13;
             // 
             // txtPrice
             // 
-            txtPrice.Location = new Point(88, 228);
+            txtPrice.Location = new Point(88, 272);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
             txtPrice.TabIndex = 12;
             // 
             // txtYear
             // 
-            txtYear.Location = new Point(88, 184);
+            txtYear.Location = new Point(88, 228);
             txtYear.Name = "txtYear";
             txtYear.Size = new Size(100, 23);
             txtYear.TabIndex = 11;
             // 
             // txtModel
             // 
-            txtModel.Location = new Point(88, 140);
+            txtModel.Location = new Point(88, 184);
             txtModel.Name = "txtModel";
             txtModel.Size = new Size(100, 23);
             txtModel.TabIndex = 10;
@@ -215,7 +228,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(25, 273);
+            label5.Location = new Point(25, 317);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 8;
@@ -224,7 +237,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(25, 231);
+            label4.Location = new Point(25, 275);
             label4.Name = "label4";
             label4.Size = new Size(36, 15);
             label4.TabIndex = 7;
@@ -233,7 +246,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(26, 187);
+            label3.Location = new Point(26, 231);
             label3.Name = "label3";
             label3.Size = new Size(32, 15);
             label3.TabIndex = 6;
@@ -242,20 +255,11 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(26, 143);
+            label2.Location = new Point(26, 187);
             label2.Name = "label2";
             label2.Size = new Size(44, 15);
             label2.TabIndex = 5;
             label2.Text = "Model:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(26, 99);
-            label1.Name = "label1";
-            label1.Size = new Size(39, 15);
-            label1.TabIndex = 4;
-            label1.Text = "Make:";
             // 
             // rdoVehicle
             // 
@@ -267,6 +271,7 @@
             rdoVehicle.TabStop = true;
             rdoVehicle.Text = "Vehicle";
             rdoVehicle.UseVisualStyleBackColor = true;
+            rdoVehicle.Click += RdoVehicleClickEH;
             // 
             // rdoPickup
             // 
@@ -278,6 +283,7 @@
             rdoPickup.TabStop = true;
             rdoPickup.Text = "Pickup";
             rdoPickup.UseVisualStyleBackColor = true;
+            rdoPickup.Click += RdoPickupClickEH;
             // 
             // rdoMotorcycle
             // 
@@ -289,6 +295,7 @@
             rdoMotorcycle.TabStop = true;
             rdoMotorcycle.Text = "Motorcycle";
             rdoMotorcycle.UseVisualStyleBackColor = true;
+            rdoMotorcycle.Click += RdoMotorcycleClickEH;
             // 
             // rdoCar
             // 
@@ -311,7 +318,7 @@
             groupBox2.Controls.Add(rdoSpecialtyNo);
             groupBox2.Controls.Add(rdoSpecialtyYes);
             groupBox2.Controls.Add(lblSpecialtyBoolean);
-            groupBox2.Location = new Point(10, 369);
+            groupBox2.Location = new Point(12, 502);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(261, 149);
             groupBox2.TabIndex = 1;
@@ -461,11 +468,74 @@
             lblTotal.TabIndex = 6;
             lblTotal.Text = "$0";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(26, 99);
+            label1.Name = "label1";
+            label1.Size = new Size(39, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Make:";
+            // 
+            // lblColorError
+            // 
+            lblColorError.AutoSize = true;
+            lblColorError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblColorError.ForeColor = Color.Red;
+            lblColorError.Location = new Point(61, 166);
+            lblColorError.Name = "lblColorError";
+            lblColorError.Size = new Size(116, 15);
+            lblColorError.TabIndex = 23;
+            lblColorError.Text = "Please enter a color";
+            // 
+            // txtColor
+            // 
+            txtColor.Location = new Point(88, 140);
+            txtColor.Name = "txtColor";
+            txtColor.Size = new Size(100, 23);
+            txtColor.TabIndex = 22;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(26, 143);
+            label7.Name = "label7";
+            label7.Size = new Size(39, 15);
+            label7.TabIndex = 21;
+            label7.Text = "Color:";
+            // 
+            // lblMileageError
+            // 
+            lblMileageError.AutoSize = true;
+            lblMileageError.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblMileageError.ForeColor = Color.Red;
+            lblMileageError.Location = new Point(61, 382);
+            lblMileageError.Name = "lblMileageError";
+            lblMileageError.Size = new Size(145, 15);
+            lblMileageError.TabIndex = 26;
+            lblMileageError.Text = "Please enter a valid price";
+            // 
+            // txtMileage
+            // 
+            txtMileage.Location = new Point(88, 358);
+            txtMileage.Name = "txtMileage";
+            txtMileage.Size = new Size(100, 23);
+            txtMileage.TabIndex = 25;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(26, 361);
+            label9.Name = "label9";
+            label9.Size = new Size(52, 15);
+            label9.TabIndex = 24;
+            label9.Text = "Mileage:";
+            // 
             // FrmVehicleStore
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(944, 555);
+            ClientSize = new Size(944, 663);
             Controls.Add(lblTotal);
             Controls.Add(label8);
             Controls.Add(btnCheckout);
@@ -493,7 +563,6 @@
         private Label label4;
         private Label label3;
         private Label label2;
-        private Label label1;
         private RadioButton rdoVehicle;
         private RadioButton rdoPickup;
         private RadioButton rdoMotorcycle;
@@ -526,5 +595,12 @@
         private Label lblTotal;
         private Label lblSpecialtyBooleanError;
         private Label lblSpecialtyDecimalError;
+        private Label lblColorError;
+        private TextBox txtColor;
+        private Label label7;
+        private Label label1;
+        private Label lblMileageError;
+        private TextBox txtMileage;
+        private Label label9;
     }
 }
